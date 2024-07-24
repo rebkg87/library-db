@@ -1,12 +1,20 @@
 package com.bookvibes.classes;
 
 public class Books {
+    private Integer id;
     private String author;
     private String title;
     private String isbn;
     private String genre;
     private String description;
 
+    public Integer getId() {
+        return id;
+    }
+
+    public void setId(Integer id) {
+        this.id = id;
+    }
     public String getAuthor() {
         return author;
     }
