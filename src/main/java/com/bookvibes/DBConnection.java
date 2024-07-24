@@ -3,9 +3,9 @@ import java.sql.DriverManager;
 import java.sql.SQLException;
 
 public class DBConnection {
-    private static final String URL = "jdbc:postgresql://localhost:5432/Librería";
+    private static final String URL = "jdbc:postgresql://localhost:5432/bdLibro";
     private static final String USER = "postgres";
-    private static final String PASSWORD = "1385";
+    private static final String PASSWORD = "femcoders";
     
     public static java.sql.Connection getConnection() throws SQLException {
         return DriverManager.getConnection(URL, USER, PASSWORD);
