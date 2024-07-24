@@ -7,7 +7,7 @@
   <groupId>com.bookvibes</groupId>
   <artifactId>library-db</artifactId>
   <version>1.0-SNAPSHOT</version>
-  <packaging>pom</packaging>
+  <packaging>jar</packaging>
   <!--<modules>
     <module>demo</module>
   </modules>-->
@@ -17,9 +17,9 @@
   <url>http://www.example.com</url>
 
   <properties>
+    <maven.compiler.source>17</maven.compiler.source>
+    <maven.compiler.target>17</maven.compiler.target>
     <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
-    <maven.compiler.source>1.7</maven.compiler.source>
-    <maven.compiler.target>1.7</maven.compiler.target>
   </properties>
 
   <dependencies>
@@ -83,7 +83,7 @@
           <artifactId>exec-maven-plugin</artifactId>
           <version>3.0.0</version>
           <configuration>
-            <mainClass>org.example.Main</mainClass>
+            <mainClass>com.bookvibes.App</mainClass>
           </configuration>
         </plugin>
       </plugins>
