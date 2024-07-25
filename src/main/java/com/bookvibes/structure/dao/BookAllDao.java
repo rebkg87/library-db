@@ -41,4 +41,12 @@ public class BookAllDao {
         }
         return bookList;
     }
+    public static void main(String[] args) {
+        BookAllDao bookDao = new BookAllDao();
+        List<Books> bookShowList = bookDao.showBooks();
+        for (Books bb : bookShowList) {
+            System.out.println("| " + bb.getId() + " | " + bb.getTitle() + " | " + bb.getIsbn() + " | " + bb.getAuthor() + " | " + bb.getGenre());
+        }
+    }
+
 }

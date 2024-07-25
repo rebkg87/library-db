@@ -30,8 +30,6 @@ public class App {
 //
 //        saveBookToDatabase(book);
 
-        BookAllDao booksito = new BookAllDao();
-        System.out.println(booksito.showBooks());
     }
 
     private static void saveBookToDatabase(Books book) {
