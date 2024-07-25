@@ -8,27 +8,27 @@ import java.util.Scanner;
 
 public class App {
     public static void main(String[] args) {
-//        Scanner scanner = new Scanner(System.in);
-//        Books book = new Books();
-//        System.out.println("Título: ");
-//        book.setTitle(scanner.nextLine());
-//
-//        System.out.println("Autores: ");
-//        book.setAuthor(scanner.nextLine());
-//
-//        System.out.println("Descripción: ");
-//        book.setDescription(scanner.nextLine());
-//
-//        System.out.println("Género: ");
-//        book.setGenre(scanner.nextLine());
-//
-//        System.out.println("ISBN: ");
-//        book.setIsbn(scanner.nextLine());
-//
-//        System.out.println();
-//        System.out.println(book.toString());
-//
-//        saveBookToDatabase(book);
+        Scanner scanner = new Scanner(System.in);
+        Books book = new Books();
+        System.out.println("Título: ");
+        book.setTitle(scanner.nextLine());
+
+        System.out.println("Autores: ");
+        book.setAuthor(scanner.nextLine());
+
+        System.out.println("Descripción: ");
+        book.setDescription(scanner.nextLine());
+
+        System.out.println("Género: ");
+        book.setGenre(scanner.nextLine());
+
+        System.out.println("ISBN: ");
+        book.setIsbn(scanner.nextLine());
+
+        System.out.println();
+        System.out.println(book.toString());
+
+        saveBookToDatabase(book);
 
     }
 
