@@ -34,7 +34,7 @@ public class BookDao {
                 bookBean.setId(rs.getInt("id"));
                 bookBean.setTitle(rs.getString("title"));
                 bookBean.setDescription(rs.getString("description"));
-                bookBean.setIsbn(rs.getString("isbn"));
+                bookBean.setIsbn(rs.getLong("isbn"));
 
                 bookList.add(bookBean);
             }
