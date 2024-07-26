@@ -69,9 +69,32 @@ CREATE TABLE IF NOT EXISTS genres_books (
 );
 
 -- - A hacer la búsqueda ya sea por título o por autor, se mostrarán todos los campos del libro/s.
-SELECT id, title, description, isbn
-FROM books
-WHERE title;
--- SELECT b.*, a.* FROM books b JOIN authors_books a ON (a.id = b.id) JOIN authors c ON ()
 
--- - A hacer la búsqueda por género literario, se mostrarán todos los campos del libro/s excepto la descripción.
+SELECT b.title, b.description, a.author
+FROM books AS b
+inner JOIN authors_books AS ab ON (b.id = ab.id_book)
+inner JOIN authors AS a ON (a.id = ab.id_author)
+WHERE a.author LIKE "author"
+
+
+SELECT b.id, b.title, b.description, a.author
+from books AS b
+inner JOIN authors_books AS ab ON (b.id = ab.id_book)
+inner JOIN authors AS a ON (a.id = ab.id_author)
+WHERE b.title LIKE "title"
+
+
+SELECT b.title, b.description, a.author
+from books AS b
+inner JOIN authors_books AS ab ON (b.id = ab.id_book)
+inner JOIN authors AS a ON (a.id = ab.id_author)
+WHERE b.id = 10
+
+
+Select b.title, b.description, a.author
+from books AS b
+inner JOIN authors_books AS ab ON (b.id = ab.id_book)
+inner JOIN authors AS a ON (a.id = ab.id_author)
+WHERE a.id = 2
+
+-- - A hacer la búsqueda por género literario, se mostrarán todos los campos del libro/s excepto la descripción.
