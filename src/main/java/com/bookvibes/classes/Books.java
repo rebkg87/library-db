@@ -1,12 +1,23 @@
 package com.bookvibes.classes;
 
+import java.util.ArrayList;
+import java.util.Arrays;
+
 public class Books {
+    private Integer id;
     private String author;
     private String title;
-    private String isbn;
+    private long isbn;
     private String genre;
     private String description;
 
+    public Integer getId() {
+        return id;
+    }
+
+    public void setId(Integer id) {
+        this.id = id;
+    }
     public String getAuthor() {
         return author;
     }
@@ -23,11 +34,11 @@ public class Books {
         this.title = title;
     }
 
-    public String getIsbn() {
+    public long getIsbn() {
         return isbn;
     }
 
-    public void setIsbn(String isbn) {
+    public void setIsbn(long isbn) {
         this.isbn = isbn;
     }
 
@@ -47,7 +58,7 @@ public class Books {
         this.description = description;
     }
 
-    public Books(String author, String title, String isbn, String genre, String description) {
+    public Books(String author, String title, long isbn, String genre, String description) {
         this.author = author;
         this.title = title;
         this.isbn = isbn;
