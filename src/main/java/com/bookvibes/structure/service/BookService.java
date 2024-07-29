@@ -20,4 +20,10 @@ public class BookService {
         List<Books> booksList = bookDao.getBookByGenre(genreId);
         return booksList;
     }
+    public List<Books> getBookByTitle(String bookTitle) {
+        BookDao bookDao = new BookDao();
+        List<Books> booksList = bookDao.getBookByTitle(bookTitle);
+        return booksList;
+    }
+
 }
