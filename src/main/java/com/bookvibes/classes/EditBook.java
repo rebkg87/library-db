@@ -1,12 +1,11 @@
 package com.bookvibes.classes;
+import com.bookvibes.DBConnection;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Scanner;
-
-import com.bookvibes.DBConnection;
 
 public class EditBook {
 
@@ -48,17 +47,18 @@ public class EditBook {
         String deleteSQL = "DELETE FROM " + tableName + " WHERE id_book = ?";
         String insertSQL = "INSERT INTO " + tableName + " (id_book, " + entityIdColumn + ") VALUES (?, ?)";
 
-        try (PreparedStatement deleteStmt = connection.prepareStatement(deleteSQL);
-             PreparedStatement insertStmt = connection.prepareStatement(insertSQL)) {
-            deleteStmt.setInt(1, bookId);
-            deleteStmt.executeUpdate();
+        try (PreparedStatement deleteStmt = connection.prepareStatement(deleteSQL)) {
+            try (PreparedStatement insertStmt = connection.prepareStatement(insertSQL)) {
+                deleteStmt.setInt(1, bookId);
+                deleteStmt.executeUpdate();
 
-            for (int entityId : newEntityIds) {
-                insertStmt.setInt(1, bookId);
-                insertStmt.setInt(2, entityId);
-                insertStmt.addBatch();
+                for (int entityId : newEntityIds) {
+                    insertStmt.setInt(1, bookId);
+                    insertStmt.setInt(2, entityId);
+                    insertStmt.addBatch();
+                }
+                insertStmt.executeBatch();
             }
-            insertStmt.executeBatch();
         }
     }
 
