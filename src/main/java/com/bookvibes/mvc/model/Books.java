@@ -1,7 +1,4 @@
-package com.bookvibes.classes;
-
-import java.util.ArrayList;
-import java.util.Arrays;
+package com.bookvibes.mvc.model;
 
 public class Books {
     private Integer id;

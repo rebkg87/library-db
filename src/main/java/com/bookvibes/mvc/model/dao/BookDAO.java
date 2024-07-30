@@ -1,13 +1,13 @@
-package com.bookvibes.structure.dao;
+package com.bookvibes.mvc.model.dao;
 
-import com.bookvibes.DBConnection;
-import com.bookvibes.classes.Books;
+import com.bookvibes.mvc.config.DBConnection;
+import com.bookvibes.mvc.model.Books;
 
 import java.sql.*;
 import java.util.ArrayList;
 import java.util.List;
 
-public class BookDao {
+public class BookDAO implements BookDAOInterface {
 
     private static String TABLENAME = "books";
 
@@ -17,6 +17,7 @@ public class BookDao {
     private static String GET_BY_TITLE= GET_ALL + "WHERE LOWER(b.title) LIKE '%' || LOWER(?) || '%' ";
 
 
+    @Override
     public List<Books> getBookByAuthor(Integer authorId) {
 
         List<Books> bookList = new ArrayList<>();
@@ -50,6 +51,7 @@ public class BookDao {
     }
 
     //buscar por género
+    @Override
     public List<Books> getBookByGenre(Integer genreId) {
         List<Books> booksList = new ArrayList<>();
 
@@ -77,6 +79,7 @@ public class BookDao {
     }
 
     //buscar por title
+    @Override
     public List<Books> getBookByTitle(String bookTitle) {
         List<Books> booksList = new ArrayList<>();
 

@@ -1,11 +1,11 @@
-package com.bookvibes.structure.view;
+package com.bookvibes.mvc.view;
 
-import com.bookvibes.classes.Authors;
-import com.bookvibes.classes.Books;
-import com.bookvibes.classes.Genres;
-import com.bookvibes.structure.service.AuthorService;
-import com.bookvibes.structure.service.BookService;
-import com.bookvibes.structure.service.GenreService;
+import com.bookvibes.mvc.model.Authors;
+import com.bookvibes.mvc.model.Books;
+import com.bookvibes.mvc.model.Genres;
+import com.bookvibes.mvc.controller.AuthorController;
+import com.bookvibes.mvc.controller.BookController;
+import com.bookvibes.mvc.controller.GenreController;
 
 import java.util.List;
 import java.util.Scanner;
@@ -20,8 +20,8 @@ public class BookView {
         Scanner scanner = new Scanner(System.in);
 
         // llamamos a las clases de servicio y las instanciamos
-        AuthorService authorService = new AuthorService();
-        BookService bookService = new BookService();
+        AuthorController authorController = new AuthorController();
+        BookController bookController = new BookController();
 
 
         System.out.println("----------------------------");
@@ -30,7 +30,7 @@ public class BookView {
         System.out.println("");
 
 
-        List<Authors> authorsList = authorService.getAll();
+        List<Authors> authorsList = authorController.getAll();
         for (Authors authors : authorsList) {
             System.out.println(authors.getId() + " | " + authors.getAuthor());
         }
@@ -44,7 +44,7 @@ public class BookView {
             int authorId = scanner.nextInt();
 
 
-            List<Books> booksList = bookService.getBookByAuthor(authorId);
+            List<Books> booksList = bookController.getBookByAuthor(authorId);
 
 
             if (booksList.size() > 0) {
@@ -66,15 +66,15 @@ public class BookView {
 
     public void showBooksByGenre() {
         Scanner scanner = new Scanner(System.in);
-        GenreService genreService = new GenreService();
-        BookService bookService = new BookService();
+        GenreController genreController = new GenreController();
+        BookController bookController = new BookController();
 
         System.out.println("----------------------------");
         System.out.println("CONSULTA DE LIBROS POR GENERO");
         System.out.println("----------------------------");
         System.out.println("");
 
-        List<Genres> genresList = genreService.getAll();
+        List<Genres> genresList = genreController.getAll();
         for (Genres genre : genresList) {
             System.out.println(genre.getId() + "|" + genre.getGenre());
         }
@@ -83,7 +83,7 @@ public class BookView {
             System.out.print("Ingrese el ID del género: ");
             int genreId = scanner.nextInt();
 
-            List<Books> booksList = bookService.getBookByGenre(genreId);
+            List<Books> booksList = bookController.getBookByGenre(genreId);
             if (booksList.size() > 0) {
                 System.out.println("El resultado de la busqueda es:");
                 for (Books books : booksList) {
@@ -101,7 +101,7 @@ public class BookView {
     public void showBooksByTitle() {
         Scanner scanner = new Scanner(System.in);
 
-        BookService bookService = new BookService();
+        BookController bookController = new BookController();
 
         System.out.println("----------------------------");
         System.out.println("CONSULTA DE LIBROS POR TITULO");
@@ -114,7 +114,7 @@ public class BookView {
         do {
             System.out.print("Ingrese el título del libro que deséa buscar: ");
             String title = scanner.next();
-            List<Books> booksList = bookService.getBookByTitle(title);
+            List<Books> booksList = bookController.getBookByTitle(title);
             System.out.println("El resultado de la busqueda es:");
             for (Books books : booksList) {
                 System.out.println("| " + books.getId() + " | " + books.getTitle() + " | " + books.getDescription() + " | " + books.getIsbn());

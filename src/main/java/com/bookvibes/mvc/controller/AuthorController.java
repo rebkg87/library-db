@@ -1,12 +1,12 @@
-package com.bookvibes.structure.service;
+package com.bookvibes.mvc.controller;
 
-import com.bookvibes.classes.Authors;
-import com.bookvibes.structure.dao.AuthorDao;
+import com.bookvibes.mvc.model.Authors;
+import com.bookvibes.mvc.model.dao.AuthorDAO;
 
 import java.util.List;
 
-public class AuthorService {
-    public AuthorService() {
+public class AuthorController {
+    public AuthorController() {
     }
 
     // todos los metodos tienen 4 partes
@@ -14,7 +14,7 @@ public class AuthorService {
     // public, private etc | void(no devuelve nada), Dato(Integer, String, List) | nombre | vacio, uno o muchos
 
     public List<Authors> getAll() {
-        AuthorDao authorDao = new AuthorDao();
+        AuthorDAO authorDao = new AuthorDAO();
         List<Authors> authorsList = authorDao.getAll();
         return authorsList;
     }
