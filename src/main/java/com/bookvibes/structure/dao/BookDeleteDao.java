@@ -7,23 +7,26 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.Scanner;
+import com.bookvibes.structure.dao.BookAllDao;
 
 public class BookDeleteDao {
 
-    //private static String TABLENAME = "books";
-    //private static String GET_ALL = "SELECT b.id, b.title, b.description, b.isbn FROM " + TABLENAME + " AS b";
-    //private static String GET_BY_AUTHOR = GET_ALL + " JOIN authors_books AS ab ON ab.id_book = b.id WHERE ab.id_author = ?";
+    private static void showBook(Connection conn) throws SQLException {
+        String selectCatalogSQL = "SELECT b.id, b.title, a.author AS author FROM books AS b " +
+                "JOIN authors_books AS ab ON b.id = ab.id_book " +
+                "JOIN authors AS a ON ab.id_author = a.id";
 
-    private static int getBookId(Connection conn, String title) throws SQLException {
-        String selectBookSQL = "SELECT id FROM books WHERE title = ?";
-        try (PreparedStatement pstmt = conn.prepareStatement(selectBookSQL)) {
-            pstmt.setString(1, title);
-            try (ResultSet rs = pstmt.executeQuery()) {
-                if (rs.next()) {
-                    return rs.getInt("id");
-                } else {
-                    throw new SQLException("Título no encontrado: " + title);
-                }
+        try (PreparedStatement pstmt = conn.prepareStatement(selectCatalogSQL);
+             ResultSet rs = pstmt.executeQuery()) {
+
+            System.out.println("ID | Título | Autor");
+            System.out.println("---------------------------");
+
+            while (rs.next()) {
+                int id = rs.getInt("id");
+                String title = rs.getString("title");
+                String author = rs.getString("author");
+                System.out.println(id + " | " + title + " | " + author);
             }
         }
     }
@@ -64,33 +67,20 @@ public class BookDeleteDao {
 
     }
 
-    public static void deleteBookByTitle (Connection conn, String title) throws SQLException{
-        int bookId = getBookId(conn, title);
-        deleteBook(conn,bookId);
-    }
-
     public static void main(String[] args) {
-        Scanner scanner =  new Scanner(System.in);
-
-        System.out.println("Si deseas eliminar un libro por ID teclea 1, si es por título teclea 2.");
-        int option = scanner.nextInt();
-        scanner.nextLine();
+        Scanner scanner = new Scanner(System.in);
 
         try (Connection conn = DBConnection.getConnection()) {
-            switch (option) {
-                case 1:
-                    System.out.println("Introduce el ID del libro a eliminar: ");
-                    int bookId = scanner.nextInt();
-                    deleteBook(conn, bookId);
-                    break;
-                case 2:
-                    System.out.println("Introduce el título del libro a eliminar: ");
-                    String title = scanner.nextLine();
-                    deleteBookByTitle(conn, title);
-                    break;
-                default:
-                    System.out.println("Opción no válida.");
-            }
+            System.out.println("----------------------------");
+            System.out.println("CONSULTA DE LIBROS");
+            System.out.println("----------------------------");
+            showBook(conn);
+            System.out.println();
+
+            System.out.println("Introduce el ID del libro a eliminar: ");
+            int bookId = scanner.nextInt();
+            deleteBook(conn, bookId);
+
 
         } catch (SQLException e) {
             e.printStackTrace();
