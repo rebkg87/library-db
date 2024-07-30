@@ -1,6 +1,6 @@
 package com.bookvibes.mvc.model.dao;
 
-import com.bookvibes.mvc.config.DBConnection;
+import com.bookvibes.mvc.DBConnection;
 import com.bookvibes.mvc.model.Authors;
 
 import java.sql.Connection;
