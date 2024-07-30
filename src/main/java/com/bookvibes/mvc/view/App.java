@@ -1,7 +1,6 @@
 package com.bookvibes.mvc.view;
+import com.bookvibes.mvc.DBConnection;
 import com.bookvibes.mvc.model.Books;
-import com.bookvibes.mvc.config.DBConnection;
-
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;

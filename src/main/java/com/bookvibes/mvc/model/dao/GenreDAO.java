@@ -1,13 +1,10 @@
 package com.bookvibes.mvc.model.dao;
-
-import com.bookvibes.mvc.config.DBConnection;
+import com.bookvibes.mvc.DBConnection;
 import com.bookvibes.mvc.model.Genres;
-
 import java.sql.Connection;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
-
 import java.util.ArrayList;
 import java.util.List;
 
