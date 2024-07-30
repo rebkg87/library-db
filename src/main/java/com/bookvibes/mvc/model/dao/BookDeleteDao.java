@@ -8,10 +8,6 @@ import java.util.Scanner;
 
 public class BookDeleteDao {
 
-    private static String TABLENAME = "books";
-    private static String GET_ALL = "SELECT b.id, b.title, b.description, b.isbn FROM " + TABLENAME + " AS b";
-    //private static String GET_BY_AUTHOR = GET_ALL + " JOIN authors_books AS ab ON ab.id_book = b.id WHERE ab.id_author = ?";
-
     private static int getBookId(Connection conn, String title) throws SQLException {
         String selectBookSQL = "SELECT id FROM books WHERE title = ?";
         try (PreparedStatement pstmt = conn.prepareStatement(selectBookSQL)) {
