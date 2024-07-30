@@ -1,4 +1,4 @@
-package com.bookvibes.structure.dao;
+package com.bookvibes.mvc.model.dao;
 
 import com.bookvibes.mvc.config.DBConnection;
 

@@ -1,4 +1,4 @@
-package com.bookvibes;
+package com.bookvibes.mvc.view;
 import com.bookvibes.mvc.model.Books;
 import com.bookvibes.mvc.config.DBConnection;
 
