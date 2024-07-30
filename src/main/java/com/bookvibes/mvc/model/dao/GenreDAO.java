@@ -1,7 +1,7 @@
-package com.bookvibes.structure.dao;
+package com.bookvibes.mvc.model.dao;
 
-import com.bookvibes.DBConnection;
-import com.bookvibes.classes.Genres;
+import com.bookvibes.mvc.config.DBConnection;
+import com.bookvibes.mvc.model.Genres;
 
 import java.sql.Connection;
 import java.sql.ResultSet;
@@ -11,11 +11,11 @@ import java.sql.Statement;
 import java.util.ArrayList;
 import java.util.List;
 
-public class GenreDao {
+public class GenreDAO {
 
     private static final String GET_ALL="SELECT a.id, a.genre FROM genres AS a";
 
-    public GenreDao() {
+    public GenreDAO() {
     }
 
     public List<Genres> getAll(){

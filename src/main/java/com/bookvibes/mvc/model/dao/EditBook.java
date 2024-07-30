@@ -1,4 +1,4 @@
-package com.bookvibes.classes;
+package com.bookvibes.mvc.model.dao;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.SQLException;

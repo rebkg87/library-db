@@ -1,11 +1,11 @@
-package com.bookvibes.structure.view;
+package com.bookvibes.mvc.view;
 
-import com.bookvibes.classes.Authors;
-import com.bookvibes.classes.Books;
-import com.bookvibes.classes.Genres;
-import com.bookvibes.structure.service.AuthorService;
-import com.bookvibes.structure.service.BookService;
-import com.bookvibes.structure.service.GenreService;
+import com.bookvibes.mvc.model.Authors;
+import com.bookvibes.mvc.model.Books;
+import com.bookvibes.mvc.model.Genres;
+import com.bookvibes.mvc.controller.AuthorController;
+import com.bookvibes.mvc.controller.BookController;
+import com.bookvibes.mvc.controller.GenreController;
 
 import java.util.List;
 import java.util.Scanner;
@@ -20,17 +20,17 @@ public class BookView {
         Scanner scanner = new Scanner(System.in);
 
         // llamamos a las clases de servicio y las instanciamos
-        AuthorService authorService = new AuthorService();
-        BookService bookService = new BookService();
+        AuthorController authorController = new AuthorController();
+        BookController bookController = new BookController();
 
-        //mostar titulo de la pagina
+
         System.out.println("----------------------------");
         System.out.println("CONSULTA DE LIBROS POR AUTOR");
         System.out.println("----------------------------");
         System.out.println("");
 
-        //mostrar los autores con id(consultar al servicio)
-        List<Authors> authorsList = authorService.getAll();
+
+        List<Authors> authorsList = authorController.getAll();
         for (Authors authors : authorsList) {
             System.out.println(authors.getId() + " | " + authors.getAuthor());
         }
@@ -39,14 +39,14 @@ public class BookView {
 
         String again;
         do {
-            //preguntar al usuario por id del autor cuyos libros desee buscar
+
             System.out.print("Ingrese el ID del autor: ");
             int authorId = scanner.nextInt();
 
-            //llamar al servicio para la consulta de libros por autor(consultar al servicio)
-            List<Books> booksList = bookService.getBookByAuthor(authorId);
 
-            //si hay resultados mostrar el resultado sino mostrar msj no hay resultados para ese id
+            List<Books> booksList = bookController.getBookByAuthor(authorId);
+
+
             if (booksList.size() > 0) {
                 System.out.println("El resultado de la busqueda es:");
                 for (Books books : booksList) {
@@ -56,7 +56,7 @@ public class BookView {
                 System.out.println("No hay resultados para su consulta.");
             }
 
-            //preguntar si desea hacer otra consulta
+
             System.out.print("Desea consultar nuevamente? (S/N): ");
             again = scanner.next();
 
@@ -66,15 +66,15 @@ public class BookView {
 
     public void showBooksByGenre() {
         Scanner scanner = new Scanner(System.in);
-        GenreService genreService = new GenreService();
-        BookService bookService = new BookService();
+        GenreController genreController = new GenreController();
+        BookController bookController = new BookController();
 
         System.out.println("----------------------------");
         System.out.println("CONSULTA DE LIBROS POR GENERO");
         System.out.println("----------------------------");
         System.out.println("");
 
-        List<Genres> genresList = genreService.getAll();
+        List<Genres> genresList = genreController.getAll();
         for (Genres genre : genresList) {
             System.out.println(genre.getId() + "|" + genre.getGenre());
         }
@@ -83,7 +83,7 @@ public class BookView {
             System.out.print("Ingrese el ID del género: ");
             int genreId = scanner.nextInt();
 
-            List<Books> booksList = bookService.getBookByGenre(genreId);
+            List<Books> booksList = bookController.getBookByGenre(genreId);
             if (booksList.size() > 0) {
                 System.out.println("El resultado de la busqueda es:");
                 for (Books books : booksList) {
@@ -97,9 +97,38 @@ public class BookView {
         } while (again.equalsIgnoreCase("S"));
     }
 
+    // por title
+    public void showBooksByTitle() {
+        Scanner scanner = new Scanner(System.in);
+
+        BookController bookController = new BookController();
+
+        System.out.println("----------------------------");
+        System.out.println("CONSULTA DE LIBROS POR TITULO");
+        System.out.println("----------------------------");
+        System.out.println("");
+
+        System.out.println();
+        String again;
+
+        do {
+            System.out.print("Ingrese el título del libro que deséa buscar: ");
+            String title = scanner.next();
+            List<Books> booksList = bookController.getBookByTitle(title);
+            System.out.println("El resultado de la busqueda es:");
+            for (Books books : booksList) {
+                System.out.println("| " + books.getId() + " | " + books.getTitle() + " | " + books.getDescription() + " | " + books.getIsbn());
+            }
+            System.out.print("Desea consultar nuevamente? (S/N): ");
+            again = scanner.next();
+        } while (again.equalsIgnoreCase("S"));
+
+    }
+
+
     public static void main(String[] args) {
         BookView bookView = new BookView();
 
-        bookView.showBooksByGenre();
+        bookView.showBooksByTitle();
     }
 }
