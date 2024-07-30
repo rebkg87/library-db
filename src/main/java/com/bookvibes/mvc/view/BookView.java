@@ -1,5 +1,6 @@
 package com.bookvibes.mvc.view;
 
+import com.bookvibes.mvc.DBConnection;
 import com.bookvibes.mvc.model.Authors;
 import com.bookvibes.mvc.model.Books;
 import com.bookvibes.mvc.model.Genres;
@@ -7,6 +8,8 @@ import com.bookvibes.mvc.controller.AuthorController;
 import com.bookvibes.mvc.controller.BookController;
 import com.bookvibes.mvc.controller.GenreController;
 
+import java.sql.Connection;
+import java.sql.SQLException;
 import java.util.List;
 import java.util.Scanner;
 
@@ -125,10 +128,37 @@ public class BookView {
 
     }
 
+    public void deleteBookFcn(String[] args) {
+        Scanner scanner = new Scanner(System.in);
+
+        try (Connection conn = DBConnection.getConnection()) {
+            System.out.println("----------------------------");
+            System.out.println("CONSULTA DE LIBROS");
+            System.out.println("----------------------------");
+            showBook(conn);
+            System.out.println();
+
+            System.out.println("Introduce el ID del libro a eliminar: ");
+            int bookId = scanner.nextInt();
+            deleteBook(conn, bookId);
+
+
+        } catch (SQLException e) {
+            e.printStackTrace();
+            System.out.println("Error: " + e.getMessage());
+        }
+    }
+
+    private void deleteBook(Connection conn, int bookId) {
+    }
+
+    private void showBook(Connection conn) {
+    }
 
     public static void main(String[] args) {
         BookView bookView = new BookView();
 
-        bookView.showBooksByTitle();
+        bookView.deleteBook();
     }
+
 }
