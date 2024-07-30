@@ -5,7 +5,7 @@ import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Scanner;
-import com.bookvibes.mvc.DBConnection;
+import com.bookvibes.mvc.config.DBConnection;
 
 public class EditBook {
 

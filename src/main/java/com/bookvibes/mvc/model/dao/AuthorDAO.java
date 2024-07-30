@@ -1,6 +1,6 @@
 package com.bookvibes.mvc.model.dao;
 
-import com.bookvibes.mvc.DBConnection;
+import com.bookvibes.mvc.config.DBConnection;
 import com.bookvibes.mvc.model.Authors;
 
 import java.sql.Connection;
@@ -41,11 +41,4 @@ public class AuthorDAO implements AuthorDAOInterface {
         return authorsList;
     }
 
-//SOLO PARA PROBAR LA CONSULTA
-//    public static void main(String[] args) {
-//        List<Authors> authorsList = new AuthorDao().getAll();
-//        for (Authors a : authorsList) {
-//            System.out.println("id => " + a.getId() + " | name => " + a.getAuthor());
-//        }
-//    }
 }

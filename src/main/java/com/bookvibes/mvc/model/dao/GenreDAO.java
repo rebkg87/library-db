@@ -1,5 +1,5 @@
 package com.bookvibes.mvc.model.dao;
-import com.bookvibes.mvc.DBConnection;
+import com.bookvibes.mvc.config.DBConnection;
 import com.bookvibes.mvc.model.Genres;
 import java.sql.Connection;
 import java.sql.ResultSet;

@@ -115,9 +115,13 @@ public class BookView {
             System.out.print("Ingrese el título del libro que deséa buscar: ");
             String title = scanner.next();
             List<Books> booksList = bookController.getBookByTitle(title);
-            System.out.println("El resultado de la busqueda es:");
-            for (Books books : booksList) {
-                System.out.println("| " + books.getId() + " | " + books.getTitle() + " | " + books.getDescription() + " | " + books.getIsbn());
+            if (booksList.size() > 0) {
+                System.out.println("El resultado de la busqueda es:");
+                for (Books books : booksList) {
+                    System.out.println("| " + books.getId() + " | " + books.getTitle() + " | " + books.getDescription() + " | " + books.getIsbn());
+                }
+            } else {
+                System.out.println("No hay resultados para su consulta.");
             }
             System.out.print("Desea consultar nuevamente? (S/N): ");
             again = scanner.next();
@@ -129,6 +133,6 @@ public class BookView {
     public static void main(String[] args) {
         BookView bookView = new BookView();
 
-        bookView.showBooksByTitle();
+        bookView.showBooksByGenre();
     }
 }
