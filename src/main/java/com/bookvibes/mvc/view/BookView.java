@@ -11,18 +11,20 @@ import java.util.List;
 import java.util.Scanner;
 
 public class BookView {
-    public BookView() {
 
+    private BookController bookController;
+    private AuthorController authorController;
+    private GenreController genreController;
+
+    public BookView(BookController bookController, AuthorController authorController, GenreController genreController) {
+        this.bookController = bookController;
+        this.authorController = authorController;
+        this.genreController = genreController;
     }
 
     public void showBooksByAuthor() {
 
         Scanner scanner = new Scanner(System.in);
-
-        // llamamos a las clases de servicio y las instanciamos
-        AuthorController authorController = new AuthorController();
-        BookController bookController = new BookController();
-
 
         System.out.println("----------------------------");
         System.out.println("CONSULTA DE LIBROS POR AUTOR");
@@ -66,8 +68,6 @@ public class BookView {
 
     public void showBooksByGenre() {
         Scanner scanner = new Scanner(System.in);
-        GenreController genreController = new GenreController();
-        BookController bookController = new BookController();
 
         System.out.println("----------------------------");
         System.out.println("CONSULTA DE LIBROS POR GENERO");
@@ -101,8 +101,6 @@ public class BookView {
     public void showBooksByTitle() {
         Scanner scanner = new Scanner(System.in);
 
-        BookController bookController = new BookController();
-
         System.out.println("----------------------------");
         System.out.println("CONSULTA DE LIBROS POR TITULO");
         System.out.println("----------------------------");
@@ -130,9 +128,4 @@ public class BookView {
     }
 
 
-    public static void main(String[] args) {
-        BookView bookView = new BookView();
-
-        bookView.showBooksByGenre();
-    }
 }
