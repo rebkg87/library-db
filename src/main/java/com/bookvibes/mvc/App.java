@@ -5,6 +5,7 @@ import com.bookvibes.mvc.controller.BookController;
 import com.bookvibes.mvc.controller.GenreController;
 import com.bookvibes.mvc.model.dao.*;
 import com.bookvibes.mvc.view.BookView;
+import com.bookvibes.mvc.view.MenuView;
 import com.bookvibes.mvc.view.SearchView;
 
 public class App {
@@ -23,8 +24,9 @@ public class App {
         //view
         BookView bookView = new BookView(bookController,authorController,genreController);
         SearchView searchView = new SearchView(bookView);
+        MenuView menuView = new MenuView(bookView,searchView);
 
-        // showSearchView
-        searchView.showSearchView();
+        // menuView
+        menuView.showMenuView();
     }
 }

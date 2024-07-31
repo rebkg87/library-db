@@ -131,7 +131,7 @@ public class BookView {
 
     }
 
-    public void deleteBook(String[] args) {
+    public void deleteBook() {
         Scanner scanner = new Scanner(System.in);
 
         try (Connection conn = DBConnection.getConnection()) {

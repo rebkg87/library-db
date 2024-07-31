@@ -104,7 +104,7 @@ public class BookDAO implements BookDAOInterface {
         return booksList;
     }
 
-    //Mostrar libros
+    //Mostrar libros para ID
 
     @Override
     public void showBook(Connection conn) throws SQLException {
