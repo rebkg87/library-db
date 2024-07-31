@@ -1,4 +1,4 @@
-package com.bookvibes.mvc;
+package com.bookvibes.mvc.config;
 import io.github.cdimascio.dotenv.Dotenv;
 import java.sql.DriverManager;
 import java.sql.SQLException;
