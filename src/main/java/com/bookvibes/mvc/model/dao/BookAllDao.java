@@ -1,7 +1,8 @@
 package com.bookvibes.mvc.model.dao;
 
 import com.bookvibes.mvc.config.DBConnection;
-import com.bookvibes.mvc.model.Books;
+import com.bookvibes.mvc.model.Book;
+
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
@@ -11,9 +12,9 @@ import java.util.List;
 
 public class BookAllDao {
 
-    public List<Books> showBooks(){
+    public List<Book> showBooks(){
 
-        List<Books> bookList = new ArrayList<>();
+        List<Book> bookList = new ArrayList<>();
 
         try {
             Connection conn = DBConnection.getConnection();
@@ -25,7 +26,7 @@ public class BookAllDao {
             ResultSet rs = ps.executeQuery();
             while (rs.next()) {
 
-                Books bookBean = new Books();
+                Book bookBean = new Book();
                 bookBean.setId(rs.getInt("id"));
                 bookBean.setTitle(rs.getString("title"));
                 bookBean.setDescription(rs.getString("description"));
@@ -42,8 +43,8 @@ public class BookAllDao {
     }
     public static void main(String[] args) {
         BookAllDao bookDao = new BookAllDao();
-        List<Books> bookShowList = bookDao.showBooks();
-        for (Books bb : bookShowList) {
+        List<Book> bookShowList = bookDao.showBooks();
+        for (Book bb : bookShowList) {
             System.out.println("| " + bb.getId() + " | " + bb.getTitle() + " | " + bb.getIsbn() + " | " + bb.getAuthor() + " | " + bb.getGenre());
         }
     }

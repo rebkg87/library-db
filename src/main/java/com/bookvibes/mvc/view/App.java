@@ -1,6 +1,7 @@
 package com.bookvibes.mvc.view;
 import com.bookvibes.mvc.config.DBConnection;
-import com.bookvibes.mvc.model.Books;
+import com.bookvibes.mvc.model.Book;
+
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
@@ -12,7 +13,7 @@ import java.util.Scanner;
 public class App {
     public static void main(String[] args) {
         Scanner scanner = new Scanner(System.in);
-        Books book = new Books();
+        Book book = new Book();
 
         System.out.println("Título: ");
         book.setTitle(scanner.nextLine());
@@ -59,7 +60,7 @@ public class App {
         scanner.close();
     }
 
-    private static void saveBookToDatabase(Books book, List<String> authors, List<String> genres) {
+    private static void saveBookToDatabase(Book book, List<String> authors, List<String> genres) {
         Connection conn = null;
         PreparedStatement pstmt = null;
         ResultSet rs = null;

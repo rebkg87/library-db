@@ -1,7 +1,6 @@
 package com.bookvibes.mvc.controller;
 
-import com.bookvibes.mvc.model.Authors;
-import com.bookvibes.mvc.model.dao.AuthorDAO;
+import com.bookvibes.mvc.model.Author;
 import com.bookvibes.mvc.model.dao.AuthorDAOInterface;
 
 import java.util.List;
@@ -14,9 +13,9 @@ public class AuthorController {
         this.authorDAOInterface = authorDAOInterface;//this.aut.. almacenará lo que contenga el parametro
     }
 
-    public List<Authors> getAll() {
+    public List<Author> getAll() {
 
-        List<Authors> authorsList = authorDAOInterface.getAll();
-        return authorsList;
+        List<Author> authorList = authorDAOInterface.getAll();
+        return authorList;
     }
 }

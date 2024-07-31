@@ -1,7 +1,6 @@
 package com.bookvibes.mvc.controller;
 
-import com.bookvibes.mvc.model.Genres;
-import com.bookvibes.mvc.model.dao.GenreDAO;
+import com.bookvibes.mvc.model.Genre;
 import com.bookvibes.mvc.model.dao.GenreDAOInterface;
 
 import java.util.List;
@@ -14,9 +13,9 @@ public class GenreController {
         this.genreDAOInterface = genreDAOInterface;
     }
 
-    public List<Genres> getAll() {
+    public List<Genre> getAll() {
 
-        List<Genres> genresList = genreDAOInterface.getAll();
-        return genresList;
+        List<Genre> genreList = genreDAOInterface.getAll();
+        return genreList;
     }
 }
