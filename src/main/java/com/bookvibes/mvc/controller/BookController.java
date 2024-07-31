@@ -3,7 +3,6 @@ package com.bookvibes.mvc.controller;
 import com.bookvibes.mvc.config.DBConnection;
 import com.bookvibes.mvc.model.Books;
 import com.bookvibes.mvc.model.dao.BookDAOInterface;
-import com.bookvibes.mvc.model.dao.BookDeleteDAOInterface;
 
 import java.sql.Connection;
 import java.sql.SQLException;
@@ -11,11 +10,9 @@ import java.util.List;
 
 public class BookController {
     private BookDAOInterface bookDAOInterface;
-    private BookDeleteDAOInterface bookDeleteDAOInterface;
 
 
-    public BookController(BookDAOInterface bookDAOInterface, BookDeleteDAOInterface bookDeleteDAOInterface ) {
-        this.bookDeleteDAOInterface = bookDeleteDAOInterface;
+    public BookController(BookDAOInterface bookDAOInterface) {
         this.bookDAOInterface = bookDAOInterface;
         }
 
@@ -40,7 +37,7 @@ public class BookController {
 
     public void showBooks() {
         try (Connection conn = DBConnection.getConnection()) {
-            bookDeleteDAOInterface.showBook(conn);
+            bookDAOInterface.showBook(conn);
         } catch (SQLException e) {
             e.printStackTrace();
             System.out.println("Error: " + e.getMessage());
@@ -49,7 +46,7 @@ public class BookController {
 
     public void deleteBook(int bookId) {
         try (Connection conn = DBConnection.getConnection()) {
-            bookDeleteDAOInterface.deleteBook(conn, bookId);
+            bookDAOInterface.deleteBook(conn, bookId);
         } catch (SQLException e) {
             e.printStackTrace();
             System.out.println("Error: " + e.getMessage());

@@ -1,18 +1,16 @@
 package com.bookvibes.mvc.view;
 
-import com.bookvibes.mvc.controller.BookController;
-
 import java.util.Scanner;
 
-public class PrincipalView {
+public class SearchView {
 
     private BookView bookView;
 
-    public PrincipalView(BookView bookView) {
+    public SearchView(BookView bookView) {
         this.bookView = bookView;
     }
 
-    public void showView() {
+    public void showSearchView() {
         Scanner scanner = new Scanner(System.in);
         System.out.println("SISTEMA DE BIBLIOTECA");
 
