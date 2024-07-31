@@ -66,7 +66,7 @@ public class BookView {
             System.out.print("Desea consultar nuevamente? (S/N): ");
             again = scanner.next();
 
-        } while (again.equalsIgnoreCase("S"));
+        } while ("S".equalsIgnoreCase(again));
 
     }
 
@@ -98,7 +98,7 @@ public class BookView {
             }
             System.out.print("Desea consultar nuevamente? (S/N): ");
             again = scanner.next();
-        } while (again.equalsIgnoreCase("S"));
+        } while ("S".equalsIgnoreCase(again));
     }
 
     // por title
@@ -127,7 +127,7 @@ public class BookView {
             }
             System.out.print("Desea consultar nuevamente? (S/N): ");
             again = scanner.next();
-        } while (again.equalsIgnoreCase("S"));
+        } while ("S".equalsIgnoreCase(again));
 
     }
 

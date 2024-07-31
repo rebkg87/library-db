@@ -56,7 +56,7 @@ public class MenuView {
                 System.out.print("Desea otra opción del MENU? (S/N): ");
                 again = scanner.next();
             } else {
-                again = "N"; // Para salir del bucle si se elige la opción 6
+                again = "N";
             }
 
         } while ("S".equalsIgnoreCase(again));

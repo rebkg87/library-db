@@ -13,21 +13,30 @@ public class SearchView {
     public void showSearchView() {
         Scanner scanner = new Scanner(System.in);
         String again;
+        String search;
         do {
-            int opBuscar = scanner.nextInt();
-                if (opBuscar == 1) {
-                    bookView.showBooksByTitle();
-                } else if (opBuscar == 2) {
-                    bookView.showBooksByGenre();
-                } else if (opBuscar == 3) {
-                    bookView.showBooksByAuthor();
-                } else {
-                    System.out.println("opcion incorrecta");
-                }
+            search = scanner.next();
 
-            System.out.print("Desea otra opcion del MENU? (S/N):");
+            switch (search) {
+                case "1":
+                    bookView.showBooksByTitle();
+                    break;
+                case "2":
+                    bookView.showBooksByGenre();
+                    break;
+                case "3":
+                    bookView.showBooksByAuthor();
+                    break;
+                default:
+                    System.out.println("Opción inválida. Por favor, intente de nuevo.");
+            }
+
             again = scanner.next();
         } while ("S".equalsIgnoreCase(again));
+
+        scanner.close();
     }
 
 }
+
+
