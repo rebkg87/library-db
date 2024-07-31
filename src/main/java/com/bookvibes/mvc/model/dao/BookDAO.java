@@ -1,6 +1,6 @@
 package com.bookvibes.mvc.model.dao;
 import com.bookvibes.mvc.config.DBConnection;
-import com.bookvibes.mvc.model.Books;
+import com.bookvibes.mvc.model.Book;
 import java.sql.*;
 import java.util.ArrayList;
 import java.util.List;
@@ -16,9 +16,9 @@ public class BookDAO implements BookDAOInterface {
 
 
     @Override
-    public List<Books> getBookByAuthor(Integer authorId) {
+    public List<Book> getBookByAuthor(Integer authorId) {
 
-        List<Books> bookList = new ArrayList<>();
+        List<Book> bookList = new ArrayList<>();
 
         try {
 
@@ -30,7 +30,7 @@ public class BookDAO implements BookDAOInterface {
 
             while (rs.next()) {
 
-                Books bookBean = new Books();
+                Book bookBean = new Book();
                 bookBean.setId(rs.getInt("id"));
                 bookBean.setTitle(rs.getString("title"));
                 bookBean.setDescription(rs.getString("description"));
@@ -50,8 +50,8 @@ public class BookDAO implements BookDAOInterface {
 
     //buscar por género
     @Override
-    public List<Books> getBookByGenre(Integer genreId) {
-        List<Books> booksList = new ArrayList<>();
+    public List<Book> getBookByGenre(Integer genreId) {
+        List<Book> bookList = new ArrayList<>();
 
         try {
             Connection conn = DBConnection.getConnection();
@@ -60,12 +60,12 @@ public class BookDAO implements BookDAOInterface {
             ResultSet rs = ps.executeQuery();
             while (rs.next()) {
 
-                Books bookBean = new Books();
+                Book bookBean = new Book();
                 bookBean.setId(rs.getInt("id"));
                 bookBean.setTitle(rs.getString("title"));
                 bookBean.setDescription(rs.getString("description"));
                 bookBean.setIsbn(rs.getLong("isbn"));
-                booksList.add(bookBean);
+                bookList.add(bookBean);
 
             }
         } catch (SQLException e) {
@@ -73,13 +73,13 @@ public class BookDAO implements BookDAOInterface {
         } finally {
             //            DBConnection.closeConnection();
         }
-        return booksList;
+        return bookList;
     }
 
     //buscar por title
     @Override
-    public List<Books> getBookByTitle(String bookTitle) {
-        List<Books> booksList = new ArrayList<>();
+    public List<Book> getBookByTitle(String bookTitle) {
+        List<Book> bookList = new ArrayList<>();
 
         try {
             Connection conn = DBConnection.getConnection();
@@ -88,12 +88,12 @@ public class BookDAO implements BookDAOInterface {
             ResultSet rs = ps.executeQuery();
             while (rs.next()) {
 
-                Books bookBean = new Books();
+                Book bookBean = new Book();
                 bookBean.setId(rs.getInt("id"));
                 bookBean.setTitle(rs.getString("title"));
                 bookBean.setDescription(rs.getString("description"));
                 bookBean.setIsbn(rs.getLong("isbn"));
-                booksList.add(bookBean);
+                bookList.add(bookBean);
 
             }
         } catch (SQLException e) {
@@ -101,7 +101,7 @@ public class BookDAO implements BookDAOInterface {
         } finally {
             //            DBConnection.closeConnection();
         }
-        return booksList;
+        return bookList;
     }
 
     //Mostrar libros para ID
@@ -168,8 +168,8 @@ public class BookDAO implements BookDAOInterface {
 
 //    public static void main(String[] args) {
 //        BookDao bookDao = new BookDao();
-//        List<Books> bookShowList = bookDao.getBookByTitle("SoMbra");
-//        for (Books bb : bookShowList) {
+//        List<Book> bookShowList = bookDao.getBookByTitle("SoMbra");
+//        for (Book bb : bookShowList) {
 //            System.out.println("| " + bb.getId() + " | " + bb.getTitle() + " | " + bb.getIsbn() + " | " );
 //        }
 //    }

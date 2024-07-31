@@ -1,6 +1,6 @@
 package com.bookvibes.mvc.model;
 
-public class Books {
+public class Book {
     private Integer id;
     private String author;
     private String title;
@@ -55,7 +55,7 @@ public class Books {
         this.description = description;
     }
 
-    public Books(String author, String title, long isbn, String genre, String description) {
+    public Book(String author, String title, long isbn, String genre, String description) {
         this.author = author;
         this.title = title;
         this.isbn = isbn;
@@ -65,7 +65,7 @@ public class Books {
 
     @Override
     public String toString() {
-        return "Books{" +
+        return "Book{" +
                 "author='" + author + '\'' +
                 ", title='" + title + '\'' +
                 ", isbn='" + isbn + '\'' +
@@ -74,6 +74,6 @@ public class Books {
                 '}';
     }
 
-    public Books() {
+    public Book() {
     }
 }

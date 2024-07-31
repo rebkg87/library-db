@@ -1,7 +1,7 @@
 package com.bookvibes.mvc.model.dao;
 
 import com.bookvibes.mvc.config.DBConnection;
-import com.bookvibes.mvc.model.Authors;
+import com.bookvibes.mvc.model.Author;
 
 import java.sql.Connection;
 import java.sql.ResultSet;
@@ -18,8 +18,8 @@ public class AuthorDAO implements AuthorDAOInterface {
     }
 
     @Override
-    public List<Authors> getAll() {
-        List<Authors> authorsList = new ArrayList<>();
+    public List<Author> getAll() {
+        List<Author> authorList = new ArrayList<>();
         try {
             Connection conn = DBConnection.getConnection();
 
@@ -27,10 +27,10 @@ public class AuthorDAO implements AuthorDAOInterface {
             ResultSet rs = stm.executeQuery(GET_ALL);
 
             while (rs.next()) {
-                Authors authors = new Authors();
-                authors.setId(rs.getInt("id"));
-                authors.setAuthor(rs.getString("author"));
-                authorsList.add(authors);
+                Author author = new Author();
+                author.setId(rs.getInt("id"));
+                author.setAuthor(rs.getString("author"));
+                authorList.add(author);
             }
 
         } catch (SQLException e) {
@@ -38,7 +38,7 @@ public class AuthorDAO implements AuthorDAOInterface {
         } finally {
             // close connection
         }
-        return authorsList;
+        return authorList;
     }
 
 }

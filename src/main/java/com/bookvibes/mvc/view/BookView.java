@@ -1,9 +1,9 @@
 package com.bookvibes.mvc.view;
 
 import com.bookvibes.mvc.config.DBConnection;
-import com.bookvibes.mvc.model.Authors;
-import com.bookvibes.mvc.model.Books;
-import com.bookvibes.mvc.model.Genres;
+import com.bookvibes.mvc.model.Author;
+import com.bookvibes.mvc.model.Book;
+import com.bookvibes.mvc.model.Genre;
 import com.bookvibes.mvc.controller.AuthorController;
 import com.bookvibes.mvc.controller.BookController;
 import com.bookvibes.mvc.controller.GenreController;
@@ -36,9 +36,9 @@ public class BookView {
         System.out.println("");
 
 
-        List<Authors> authorsList = authorController.getAll();
-        for (Authors authors : authorsList) {
-            System.out.println(authors.getId() + " | " + authors.getAuthor());
+        List<Author> authorList = authorController.getAll();
+        for (Author author : authorList) {
+            System.out.println(author.getId() + " | " + author.getAuthor());
         }
 
         System.out.println();
@@ -50,13 +50,13 @@ public class BookView {
             int authorId = scanner.nextInt();
 
 
-            List<Books> booksList = bookController.getBookByAuthor(authorId);
+            List<Book> bookList = bookController.getBookByAuthor(authorId);
 
 
-            if (booksList.size() > 0) {
+            if (bookList.size() > 0) {
                 System.out.println("El resultado de la busqueda es:");
-                for (Books books : booksList) {
-                    System.out.println(books.getId() + " | " + books.getTitle() + " | " + books.getDescription() + " | " + books.getIsbn());
+                for (Book book : bookList) {
+                    System.out.println(book.getId() + " | " + book.getTitle() + " | " + book.getDescription() + " | " + book.getIsbn());
                 }
             } else {
                 System.out.println("No hay resultados para su consulta.");
@@ -78,8 +78,8 @@ public class BookView {
         System.out.println("----------------------------");
         System.out.println("");
 
-        List<Genres> genresList = genreController.getAll();
-        for (Genres genre : genresList) {
+        List<Genre> genreList = genreController.getAll();
+        for (Genre genre : genreList) {
             System.out.println(genre.getId() + "|" + genre.getGenre());
         }
         String again;
@@ -87,11 +87,11 @@ public class BookView {
             System.out.print("Ingrese el ID del género: ");
             int genreId = scanner.nextInt();
 
-            List<Books> booksList = bookController.getBookByGenre(genreId);
-            if (booksList.size() > 0) {
+            List<Book> bookList = bookController.getBookByGenre(genreId);
+            if (bookList.size() > 0) {
                 System.out.println("El resultado de la busqueda es:");
-                for (Books books : booksList) {
-                    System.out.println(books.getId() + " | " + books.getTitle() + " | " + books.getIsbn());
+                for (Book book : bookList) {
+                    System.out.println(book.getId() + " | " + book.getTitle() + " | " + book.getIsbn());
                 }
             } else {
                 System.out.println("No hay resultados para su consulta.");
@@ -116,11 +116,11 @@ public class BookView {
         do {
             System.out.print("Ingrese el título del libro que deséa buscar: ");
             String title = scanner.next();
-            List<Books> booksList = bookController.getBookByTitle(title);
-            if (booksList.size() > 0) {
+            List<Book> bookList = bookController.getBookByTitle(title);
+            if (bookList.size() > 0) {
                 System.out.println("El resultado de la busqueda es:");
-                for (Books books : booksList) {
-                    System.out.println("| " + books.getId() + " | " + books.getTitle() + " | " + books.getDescription() + " | " + books.getIsbn());
+                for (Book book : bookList) {
+                    System.out.println("| " + book.getId() + " | " + book.getTitle() + " | " + book.getDescription() + " | " + book.getIsbn());
                 }
             } else {
                 System.out.println("No hay resultados para su consulta.");

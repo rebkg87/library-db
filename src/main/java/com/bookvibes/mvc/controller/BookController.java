@@ -1,7 +1,7 @@
 package com.bookvibes.mvc.controller;
 
 import com.bookvibes.mvc.config.DBConnection;
-import com.bookvibes.mvc.model.Books;
+import com.bookvibes.mvc.model.Book;
 import com.bookvibes.mvc.model.dao.BookDAOInterface;
 
 import java.sql.Connection;
@@ -17,22 +17,22 @@ public class BookController {
         }
 
 
-    public List<Books> getBookByAuthor(Integer authorId) {
+    public List<Book> getBookByAuthor(Integer authorId) {
 
-        List<Books> booksList = bookDAOInterface.getBookByAuthor(authorId);
-        return booksList;
+        List<Book> bookList = bookDAOInterface.getBookByAuthor(authorId);
+        return bookList;
     }
 
-    public List<Books> getBookByGenre(Integer genreId) {
+    public List<Book> getBookByGenre(Integer genreId) {
 
-        List<Books> booksList = bookDAOInterface.getBookByGenre(genreId);
-        return booksList;
+        List<Book> bookList = bookDAOInterface.getBookByGenre(genreId);
+        return bookList;
     }
 
-    public List<Books> getBookByTitle(String bookTitle) {
+    public List<Book> getBookByTitle(String bookTitle) {
 
-        List<Books> booksList = bookDAOInterface.getBookByTitle(bookTitle);
-        return booksList;
+        List<Book> bookList = bookDAOInterface.getBookByTitle(bookTitle);
+        return bookList;
     }
 
     public void showBooks() {

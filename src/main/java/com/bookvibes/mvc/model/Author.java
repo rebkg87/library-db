@@ -1,13 +1,13 @@
 package com.bookvibes.mvc.model;
 
-public class Authors {
+public class Author {
     private Integer id;
     private String author;
 
-    public Authors() {
+    public Author() {
     }
 
-    public Authors(Integer id, String author) {
+    public Author(Integer id, String author) {
         this.id = id;
         this.author = author;
     }

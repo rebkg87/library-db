@@ -1,13 +1,13 @@
 package com.bookvibes.mvc.model;
 
-public class Genres {
+public class Genre {
    private  Integer id;
    private String genre;
 
-    public Genres() {
+    public Genre() {
     }
 
-    public Genres(Integer id, String genre) {
+    public Genre(Integer id, String genre) {
         this.id = id;
         this.genre = genre;
     }
