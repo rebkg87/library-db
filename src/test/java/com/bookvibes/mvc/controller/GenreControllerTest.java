@@ -1,7 +1,7 @@
 package com.bookvibes.mvc.controller;
 
 import com.bookvibes.mvc.model.Genres;
-import com.bookvibes.mvc.model.dao.GenreDAO;
+import com.bookvibes.mvc.model.dao.GenreDAOInterface;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
 import org.mockito.InjectMocks;
@@ -18,25 +18,22 @@ import static org.mockito.Mockito.*;
 public class GenreControllerTest {
 
     @Mock
-    private GenreDAO genreDao;
+    private GenreDAOInterface genreDAOInterface;
 
     @InjectMocks
     private GenreController genreController;
 
     @Test
     public void testGetAll() {
-        // Arrange
         List<Genres> expectedGenres = new ArrayList<>();
-        expectedGenres.add(new Genres(1, "Genre 1"));
+        expectedGenres.add(new Genres(1,"Genre 1"));
         expectedGenres.add(new Genres(2,"Genre 2"));
 
-        when(genreDao.getAll()).thenReturn(expectedGenres);
+        when(genreDAOInterface.getAll()).thenReturn(expectedGenres);
 
-        // Act
         List<Genres> actualGenres = genreController.getAll();
 
-        // Assert
         assertEquals(expectedGenres, actualGenres);
-        verify(genreDao, times(1)).getAll();
+        verify(genreDAOInterface, times(1)).getAll();
     }
 }

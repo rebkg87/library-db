@@ -1,10 +1,4 @@
 -------------------------------------------------------------------------------
 Test set: com.bookvibes.mvc.controller.GenreControllerTest
 -------------------------------------------------------------------------------
-Tests run: 1, Failures: 0, Errors: 1, Skipped: 0, Time elapsed: 0.668 s <<< FAILURE! - in com.bookvibes.mvc.controller.GenreControllerTest
-testGetAll  Time elapsed: 0.643 s  <<< ERROR!
-java.lang.RuntimeException: org.postgresql.util.PSQLException: FATAL: password authentication failed for user "postgres"
-	at com.bookvibes.mvc.controller.GenreControllerTest.testGetAll(GenreControllerTest.java:36)
-Caused by: org.postgresql.util.PSQLException: FATAL: password authentication failed for user "postgres"
-	at com.bookvibes.mvc.controller.GenreControllerTest.testGetAll(GenreControllerTest.java:36)
-
+Tests run: 1, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 0.389 s - in com.bookvibes.mvc.controller.GenreControllerTest
