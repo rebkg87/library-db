@@ -1,4 +1,4 @@
-package com.bookvibes.classes;
+package com.bookvibes.mvc.model;
 
 public class Genres {
    private  Integer id;

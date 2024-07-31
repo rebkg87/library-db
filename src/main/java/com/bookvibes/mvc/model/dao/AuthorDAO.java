@@ -1,7 +1,7 @@
-package com.bookvibes.structure.dao;
+package com.bookvibes.mvc.model.dao;
 
-import com.bookvibes.DBConnection;
-import com.bookvibes.classes.Authors;
+import com.bookvibes.mvc.config.DBConnection;
+import com.bookvibes.mvc.model.Authors;
 
 import java.sql.Connection;
 import java.sql.ResultSet;
@@ -10,13 +10,14 @@ import java.sql.Statement;
 import java.util.ArrayList;
 import java.util.List;
 
-public class AuthorDao {
+public class AuthorDAO implements AuthorDAOInterface {
 
     private static final String GET_ALL = "SELECT a.id, a.author FROM authors AS a";
 
-    public AuthorDao() {
+    public AuthorDAO() {
     }
 
+    @Override
     public List<Authors> getAll() {
         List<Authors> authorsList = new ArrayList<>();
         try {
@@ -39,11 +40,5 @@ public class AuthorDao {
         }
         return authorsList;
     }
-//SOLO PARA PROBAR LA CONSULTA
-//    public static void main(String[] args) {
-//        List<Authors> authorsList = new AuthorDao().getAll();
-//        for (Authors a : authorsList) {
-//            System.out.println("id => " + a.getId() + " | name => " + a.getAuthor());
-//        }
-//    }
+
 }
