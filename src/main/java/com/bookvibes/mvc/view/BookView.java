@@ -1,6 +1,6 @@
 package com.bookvibes.mvc.view;
 
-import com.bookvibes.mvc.DBConnection;
+import com.bookvibes.mvc.config.DBConnection;
 import com.bookvibes.mvc.model.Authors;
 import com.bookvibes.mvc.model.Books;
 import com.bookvibes.mvc.model.Genres;
@@ -14,18 +14,21 @@ import java.util.List;
 import java.util.Scanner;
 
 public class BookView {
-    public BookView() {
 
+    private BookController bookController;
+    private AuthorController authorController;
+    private GenreController genreController;
+
+
+    public BookView(BookController bookController, AuthorController authorController, GenreController genreController) {
+        this.bookController = bookController;
+        this.authorController = authorController;
+        this.genreController = genreController;
     }
 
     public void showBooksByAuthor() {
 
         Scanner scanner = new Scanner(System.in);
-
-        // llamamos a las clases de servicio y las instanciamos
-        AuthorController authorController = new AuthorController();
-        BookController bookController = new BookController();
-
 
         System.out.println("----------------------------");
         System.out.println("CONSULTA DE LIBROS POR AUTOR");
@@ -69,8 +72,6 @@ public class BookView {
 
     public void showBooksByGenre() {
         Scanner scanner = new Scanner(System.in);
-        GenreController genreController = new GenreController();
-        BookController bookController = new BookController();
 
         System.out.println("----------------------------");
         System.out.println("CONSULTA DE LIBROS POR GENERO");
@@ -104,8 +105,6 @@ public class BookView {
     public void showBooksByTitle() {
         Scanner scanner = new Scanner(System.in);
 
-        BookController bookController = new BookController();
-
         System.out.println("----------------------------");
         System.out.println("CONSULTA DE LIBROS POR TITULO");
         System.out.println("----------------------------");
@@ -118,9 +117,13 @@ public class BookView {
             System.out.print("Ingrese el título del libro que deséa buscar: ");
             String title = scanner.next();
             List<Books> booksList = bookController.getBookByTitle(title);
-            System.out.println("El resultado de la busqueda es:");
-            for (Books books : booksList) {
-                System.out.println("| " + books.getId() + " | " + books.getTitle() + " | " + books.getDescription() + " | " + books.getIsbn());
+            if (booksList.size() > 0) {
+                System.out.println("El resultado de la busqueda es:");
+                for (Books books : booksList) {
+                    System.out.println("| " + books.getId() + " | " + books.getTitle() + " | " + books.getDescription() + " | " + books.getIsbn());
+                }
+            } else {
+                System.out.println("No hay resultados para su consulta.");
             }
             System.out.print("Desea consultar nuevamente? (S/N): ");
             again = scanner.next();
@@ -128,19 +131,19 @@ public class BookView {
 
     }
 
-    public void deleteBookFcn(String[] args) {
+    public void deleteBook(String[] args) {
         Scanner scanner = new Scanner(System.in);
 
         try (Connection conn = DBConnection.getConnection()) {
             System.out.println("----------------------------");
             System.out.println("CONSULTA DE LIBROS");
             System.out.println("----------------------------");
-            showBook(conn);
+            bookController.showBooks();
             System.out.println();
 
             System.out.println("Introduce el ID del libro a eliminar: ");
             int bookId = scanner.nextInt();
-            deleteBook(conn, bookId);
+            bookController.deleteBook(bookId);
 
 
         } catch (SQLException e) {
@@ -149,16 +152,5 @@ public class BookView {
         }
     }
 
-    private void deleteBook(Connection conn, int bookId) {
-    }
-
-    private void showBook(Connection conn) {
-    }
-
-    public static void main(String[] args) {
-        BookView bookView = new BookView();
-
-        bookView.deleteBook();
-    }
 
 }

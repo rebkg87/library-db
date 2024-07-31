@@ -1,9 +1,8 @@
 package com.bookvibes.mvc.controller;
 
-import com.bookvibes.mvc.DBConnection;
+import com.bookvibes.mvc.config.DBConnection;
 import com.bookvibes.mvc.model.Books;
-import com.bookvibes.mvc.model.dao.BookDAO;
-import com.bookvibes.mvc.model.dao.BookDeleteDAO;
+import com.bookvibes.mvc.model.dao.BookDAOInterface;
 import com.bookvibes.mvc.model.dao.BookDeleteDAOInterface;
 
 import java.sql.Connection;
@@ -11,32 +10,37 @@ import java.sql.SQLException;
 import java.util.List;
 
 public class BookController {
-    private BookDeleteDAOInterface bookDeleteDao;
+    private BookDAOInterface bookDAOInterface;
+    private BookDeleteDAOInterface bookDeleteDAOInterface;
 
-    public BookController() {
-        this.bookDeleteDao = new BookDeleteDAO();
-    }
+
+    public BookController(BookDAOInterface bookDAOInterface, BookDeleteDAOInterface bookDeleteDAOInterface ) {
+        this.bookDeleteDAOInterface = bookDeleteDAOInterface;
+        this.bookDAOInterface = bookDAOInterface;
+        }
+
 
     public List<Books> getBookByAuthor(Integer authorId) {
-        BookDAO bookDao = new BookDAO();
-        List<Books> booksList = bookDao.getBookByAuthor(authorId);
+
+        List<Books> booksList = bookDAOInterface.getBookByAuthor(authorId);
         return booksList;
     }
 
     public List<Books> getBookByGenre(Integer genreId) {
-        BookDAO bookDao = new BookDAO();
-        List<Books> booksList = bookDao.getBookByGenre(genreId);
+
+        List<Books> booksList = bookDAOInterface.getBookByGenre(genreId);
         return booksList;
     }
+
     public List<Books> getBookByTitle(String bookTitle) {
-        BookDAO bookDao = new BookDAO();
-        List<Books> booksList = bookDao.getBookByTitle(bookTitle);
+
+        List<Books> booksList = bookDAOInterface.getBookByTitle(bookTitle);
         return booksList;
     }
 
     public void showBooks() {
         try (Connection conn = DBConnection.getConnection()) {
-            bookDeleteDao.showBook(conn);
+            bookDeleteDAOInterface.showBook(conn);
         } catch (SQLException e) {
             e.printStackTrace();
             System.out.println("Error: " + e.getMessage());
@@ -45,7 +49,7 @@ public class BookController {
 
     public void deleteBook(int bookId) {
         try (Connection conn = DBConnection.getConnection()) {
-            bookDeleteDao.deleteBook(conn, bookId);
+            bookDeleteDAOInterface.deleteBook(conn, bookId);
         } catch (SQLException e) {
             e.printStackTrace();
             System.out.println("Error: " + e.getMessage());

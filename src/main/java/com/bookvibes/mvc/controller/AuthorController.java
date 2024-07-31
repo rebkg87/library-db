@@ -2,20 +2,21 @@ package com.bookvibes.mvc.controller;
 
 import com.bookvibes.mvc.model.Authors;
 import com.bookvibes.mvc.model.dao.AuthorDAO;
+import com.bookvibes.mvc.model.dao.AuthorDAOInterface;
 
 import java.util.List;
 
 public class AuthorController {
-    public AuthorController() {
+
+    private AuthorDAOInterface authorDAOInterface;//declarando y sera usado en la linea 14 this.
+
+    public AuthorController(AuthorDAOInterface authorDAOInterface) {
+        this.authorDAOInterface = authorDAOInterface;//this.aut.. almacenará lo que contenga el parametro
     }
 
-    // todos los metodos tienen 4 partes
-    // NIVEL_ACCESO        | TIPO                                                | NOMBRE | (PARAMETROS_ENTRADA)
-    // public, private etc | void(no devuelve nada), Dato(Integer, String, List) | nombre | vacio, uno o muchos
-
     public List<Authors> getAll() {
-        AuthorDAO authorDao = new AuthorDAO();
-        List<Authors> authorsList = authorDao.getAll();
+
+        List<Authors> authorsList = authorDAOInterface.getAll();
         return authorsList;
     }
 }

@@ -1,5 +1,5 @@
 package com.bookvibes.mvc.model.dao;
-import com.bookvibes.mvc.DBConnection;
+import com.bookvibes.mvc.config.DBConnection;
 import com.bookvibes.mvc.model.Genres;
 import java.sql.Connection;
 import java.sql.ResultSet;
@@ -8,13 +8,14 @@ import java.sql.Statement;
 import java.util.ArrayList;
 import java.util.List;
 
-public class GenreDAO {
+public class GenreDAO implements GenreDAOInterface {
 
     private static final String GET_ALL="SELECT a.id, a.genre FROM genres AS a";
 
     public GenreDAO() {
     }
 
+    @Override
     public List<Genres> getAll(){
         List<Genres> genderList=new ArrayList<>();
         try{
