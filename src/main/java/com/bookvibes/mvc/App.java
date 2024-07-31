@@ -14,9 +14,10 @@ public class App {
         BookDAOInterface bookDAOInterface = new BookDAO();
         AuthorDAOInterface authorDAOInterface=new AuthorDAO();
         GenreDAOInterface genreDAOInterface=new GenreDAO();
+        BookAllDaoInterface bookAllDaoInterface = new BookAllDao();
 
         // controller
-        BookController bookController = new BookController(bookDAOInterface);
+        BookController bookController = new BookController(bookDAOInterface, bookAllDaoInterface);
         AuthorController authorController=new AuthorController(authorDAOInterface);
         GenreController  genreController=new GenreController(genreDAOInterface);
 

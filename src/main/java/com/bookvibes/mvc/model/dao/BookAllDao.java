@@ -9,8 +9,10 @@ import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
 
-public class BookAllDao {
+public class BookAllDao implements BookAllDaoInterface {
 
+
+    @Override
     public List<Books> showBooks(){
 
         List<Books> bookList = new ArrayList<>();
@@ -40,12 +42,4 @@ public class BookAllDao {
         }
         return bookList;
     }
-    public static void main(String[] args) {
-        BookAllDao bookDao = new BookAllDao();
-        List<Books> bookShowList = bookDao.showBooks();
-        for (Books bb : bookShowList) {
-            System.out.println("| " + bb.getId() + " | " + bb.getTitle() + " | " + bb.getIsbn() + " | " + bb.getAuthor() + " | " + bb.getGenre());
-        }
-    }
-
 }

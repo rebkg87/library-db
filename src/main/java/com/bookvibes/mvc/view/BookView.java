@@ -127,5 +127,12 @@ public class BookView {
 
     }
 
+    public void showAllBooks() {
+        List<Books> bookShowList = bookController.getAllBooks();
+        for (Books bb : bookShowList) {
+            System.out.println("| " + bb.getId() + " | " + bb.getTitle() + " | " + bb.getAuthor() + " | " + bb.getGenre() + " | " + bb.getIsbn() + " | ");
+        }
+    }
+
 
 }

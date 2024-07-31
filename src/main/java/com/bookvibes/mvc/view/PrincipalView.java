@@ -19,10 +19,11 @@ public class PrincipalView {
         String again;
         do {
 
-            System.out.println("(1)  BUSCAR");//1buscar,2editar,3eliminar
-            System.out.println("(2) EDITAR");//1buscar,2editar,3eliminar
-            System.out.println("(3) Eliminar");//1buscar,2editar,3eliminar
-            System.out.println("que opcion quieres:");//1buscar,2editar,3eliminar
+            System.out.println("(1)  BUSCAR");//1buscar,2editar,3eliminar, 4mostrar
+            System.out.println("(2) EDITAR");//1buscar,2editar,3eliminar, 4mostrar
+            System.out.println("(3) Eliminar");//1buscar,2editar,3eliminar, 4mostrar
+            System.out.println("(4) Mostrar todos los libros");//1buscar,2editar,3eliminar, 4mostrar
+            System.out.println("que opcion quieres:");//1buscar,2editar,3eliminar, 4mostrar
             int option = scanner.nextInt();
             if (option == 1) {
                 System.out.println("que deseas buscar por : titulo (1), genero(2), autor(3)");
@@ -36,7 +37,8 @@ public class PrincipalView {
                 } else {
                     System.out.println("opcion incorrecta");
                 }
-
+            } else if (option == 4) {
+                bookView.showAllBooks();
             } else if (option == 2 || option == 3) {
                 System.out.println("OPCIONES NO IMPLEMENTADAS AUN.");
             }
@@ -45,5 +47,4 @@ public class PrincipalView {
             again = scanner.next();
         } while ("S".equalsIgnoreCase(again));
     }
-
 }
