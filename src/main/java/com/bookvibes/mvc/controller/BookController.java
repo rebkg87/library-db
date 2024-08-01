@@ -52,4 +52,8 @@ public class BookController {
             System.out.println("Error: " + e.getMessage());
         }
     }
+    public  List<Book> getAllBooks(){
+        List<Book> bookShowList = bookDAOInterface.showBooks();
+        return bookShowList;
+    }
 }

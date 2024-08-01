@@ -166,6 +166,38 @@ public class BookDAO implements BookDAOInterface {
 
     }
 
+    //Mostrar todos los libros
+    @Override
+    public List<Book> showBooks(){
+
+        List<Book> bookList = new ArrayList<>();
+
+        try {
+            Connection conn = DBConnection.getConnection();
+            PreparedStatement ps = conn.prepareStatement("select b.id, b.title, b.description, b.isbn, a.author, g.genre from books as b\n" +
+                    "join authors_books as ab on b.id = ab.id_book\n" +
+                    "join authors as a on a.id = ab.id_author\n" +
+                    "join genres_books as gb on b.id = gb.id_book\n" +
+                    "join genres as g on g.id = gb.id_genre;");
+            ResultSet rs = ps.executeQuery();
+            while (rs.next()) {
+
+                Book bookBean = new Book();
+                bookBean.setId(rs.getInt("id"));
+                bookBean.setTitle(rs.getString("title"));
+                bookBean.setDescription(rs.getString("description"));
+                bookBean.setIsbn(rs.getLong("isbn"));
+                bookBean.setAuthor(rs.getString("author"));
+                bookBean.setGenre(rs.getString("genre"));
+
+                bookList.add(bookBean);
+            }
+        } catch (SQLException e) {
+            throw new RuntimeException(e);
+        }
+        return bookList;
+    }
+
 //    public static void main(String[] args) {
 //        BookDao bookDao = new BookDao();
 //        List<Book> bookShowList = bookDao.getBookByTitle("SoMbra");
