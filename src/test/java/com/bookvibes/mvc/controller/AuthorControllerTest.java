@@ -8,7 +8,7 @@ import org.mockito.InjectMocks;
 import org.mockito.Mock;
 import org.mockito.junit.jupiter.MockitoExtension;
 
-import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
@@ -26,9 +26,10 @@ public class AuthorControllerTest {
     @Test
     public void testGetAll() {
         // Arrange
-        List<Authors> expectedAuthors = new ArrayList<>();
-        expectedAuthors.add(new Authors(1,"Author 1"));
-        expectedAuthors.add(new Authors(2,"Author 2"));
+        List<Authors> expectedAuthors = Arrays.asList(
+                new Authors(1, "Author 1"),
+                new Authors(2, "Author 2")
+        );
 
         when(authorDAOInterface.getAll()).thenReturn(expectedAuthors);
 

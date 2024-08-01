@@ -28,8 +28,8 @@ public class BookControllerTest {
         // Arrange
         Integer authorId = 1;
         List<Books> expectedBooks = new ArrayList<>();
-        expectedBooks.add(new Books("Author 1", "Title 1", 1234567, "Genre", "Description"));
-        expectedBooks.add(new Books("Author 1", "Title 2", 1234568, "Genre", "Description"));
+        expectedBooks.add(new Books("JK Rowling", "Harry Potter y la Piedra Filosofal", 1234567, "Fantástico", "Description"));
+        expectedBooks.add(new Books("Sergi Torres", "La biología del presente", 1234568, "Autoayuda", "Description"));
 
         when(bookDAOInterface.getBookByAuthor(authorId)).thenReturn(expectedBooks);
 
@@ -46,8 +46,8 @@ public class BookControllerTest {
         // Arrange
         Integer genreId = 1;
         List<Books> expectedBooks = new ArrayList<>();
-        expectedBooks.add(new Books("Author 1", "Title 1", 1234567, "Genre", "Description"));
-        expectedBooks.add(new Books("Author 2", "Title 2", 1234568, "Genre", "Description"));
+        expectedBooks.add(new Books("JK Rowling", "Harry Potter y la Piedra Filosofal", 1234567, "Fantástico", "Description"));
+        expectedBooks.add(new Books("Sergi Torres", "La biología del presente", 1234568, "Autoayuda", "Description"));
 
         when(bookDAOInterface.getBookByGenre(genreId)).thenReturn(expectedBooks);
 
@@ -64,8 +64,8 @@ public class BookControllerTest {
         // Arrange
         String bookTitle = "Title 1";
         List<Books> expectedBooks = new ArrayList<>();
-        expectedBooks.add(new Books("Author 1", "Title 1", 1234567, "Genre", "Description"));
-        expectedBooks.add(new Books("Author 2", "Title 1", 1234568, "Genre", "Description"));
+        expectedBooks.add(new Books("JK Rowling", "Harry Potter y la Piedra Filosofal", 1234567, "Fantástico", "Description"));
+        expectedBooks.add(new Books("Sergi Torres", "La biología del presente", 1234568, "Autoayuda", "Description"));
 
         when(bookDAOInterface.getBookByTitle(bookTitle)).thenReturn(expectedBooks);
 

@@ -8,7 +8,7 @@ import org.mockito.InjectMocks;
 import org.mockito.Mock;
 import org.mockito.junit.jupiter.MockitoExtension;
 
-import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
@@ -25,14 +25,18 @@ public class GenreControllerTest {
 
     @Test
     public void testGetAll() {
-        List<Genres> expectedGenres = new ArrayList<>();
-        expectedGenres.add(new Genres(1,"Genre 1"));
-        expectedGenres.add(new Genres(2,"Genre 2"));
+        // Arrange
+        List<Genres> expectedGenres = Arrays.asList(
+                new Genres(1, "Misterio"),
+                new Genres(2, "Suspense")
+        );
 
         when(genreDAOInterface.getAll()).thenReturn(expectedGenres);
 
+        // Act
         List<Genres> actualGenres = genreController.getAll();
 
+        // Assert
         assertEquals(expectedGenres, actualGenres);
         verify(genreDAOInterface, times(1)).getAll();
     }
