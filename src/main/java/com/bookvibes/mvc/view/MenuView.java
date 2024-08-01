@@ -24,14 +24,13 @@ public class MenuView {
             System.out.println("3. Editar libro");
             System.out.println("4. Buscar libro");
             System.out.println("5. Eliminar libro");
-            System.out.println("6. Mostrar todos los libros");
-            System.out.println("7. Salir");
+            System.out.println("6. Salir");
             System.out.print("Seleccione una opción: ");
             choice = scanner.next();
 
             switch (choice) {
                 case "1":
-                    bookView.showBooksByGenre();
+                    bookView.showAllBooks();
                     break;
                 case "2":
                     bookView.showBooksByGenre();
@@ -47,9 +46,6 @@ public class MenuView {
                     bookView.deleteBook();
                     break;
                 case "6":
-                    bookView.showAllBooks();
-                    break;
-                case "7":
                     System.out.println("Saliendo...");
                     break;
                 default:
