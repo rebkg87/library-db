@@ -25,7 +25,7 @@ public class GenreControllerTest {
 
     @Test
     public void testGetAll() {
-        // Arrange
+
         List<Genre> expectedGenres = Arrays.asList(
                 new Genre(1, "Misterio"),
                 new Genre(2, "Suspense")
@@ -33,10 +33,8 @@ public class GenreControllerTest {
 
         when(genreDAOInterface.getAll()).thenReturn(expectedGenres);
 
-        // Act
         List<Genre> actualGenres = genreController.getAll();
 
-        // Assert
         assertEquals(expectedGenres, actualGenres);
         verify(genreDAOInterface, times(1)).getAll();
     }

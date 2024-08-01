@@ -24,7 +24,7 @@ public class BookControllerTest {
 
     @Test
     public void testGetBookByAuthor() {
-        // Arrange
+
         Integer authorId = 1;
         List<Book> expectedBooks = new ArrayList<>();
         expectedBooks.add(new Book("JK Rowling", "Harry Potter y la Piedra Filosofal", 1234567, "Fantástico", "Description"));
@@ -32,10 +32,8 @@ public class BookControllerTest {
 
         when(bookDAOInterface.getBookByAuthor(authorId)).thenReturn(expectedBooks);
 
-        // Act
         List<Book> actualBooks = bookController.getBookByAuthor(authorId);
 
-        // Assert
         assertEquals(expectedBooks, actualBooks);
         verify(bookDAOInterface, times(1)).getBookByAuthor(authorId);
     }

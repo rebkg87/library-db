@@ -25,7 +25,6 @@ public class AuthorControllerTest {
 
     @Test
     public void testGetAll() {
-        // Arrange
         List<Author> expectedAuthors = Arrays.asList(
                 new Author(1, "JK Rowling"),
                 new Author(2, "Paulo Cohelo")
@@ -33,10 +32,8 @@ public class AuthorControllerTest {
 
         when(authorDAOInterface.getAll()).thenReturn(expectedAuthors);
 
-        // Act
         List<Author> actualAuthors = authorController.getAll();
 
-        // Assert
         assertEquals(expectedAuthors, actualAuthors);
         verify(authorDAOInterface, times(1)).getAll();
     }
