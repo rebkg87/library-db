@@ -10,23 +10,23 @@ atreves de una conexión a la base de datos en postgres.
 Funcionalidades 📋
 
 Podrá realizar las siguientes acciones:
--Buscar: Podrá hacer la búsqueda de un libro ya sea por título, autor o género literario.
--Añadir: Podrá añadir un libro a la base de datos.
--Eliminar: Podrá eliminar un libro de la base de datos.
--Editar: Podrá editar un libro de la base de datos.
+1. Buscar: Podrá hacer la búsqueda de un libro ya sea por título, autor o género literario.
+2. Añadir: Podrá añadir un libro a la base de datos.
+3. Eliminar: Podrá eliminar un libro de la base de datos.
+4. Editar: Podrá editar un libro de la base de datos.
 
 Tecnologías Utilizadas 🛠️
 
--Java
--Junit con Mokito
--PostgreSQL
--IntelliJ
+1. Java
+2. Junit con Mokito
+3. PostgreSQL
+4. IntelliJ
 
 Guía de instalación 🔧
 
--Acceda a la página del repositorio online.
--Copie la URL del repositorio que aparece al acceder al botón 'Code'
--Ingresar a IntelliJ y en la Terminal escribimos lo siguiente: $ git clone (y el enlace copiado) cd ../path/to/the/file
+1. Acceda a la página del repositorio online.
+2. Copie la URL del repositorio que aparece al acceder al botón 'Code'
+3. Ingresar a IntelliJ y en la Terminal escribimos lo siguiente: $ git clone (y el enlace copiado) cd ../path/to/the/file
 
 Cómo visualizarlo a través de la consola
 
@@ -39,8 +39,8 @@ Cómo correr los test
 
 Autoras ✒️
 
-Sara Teran - https://github.com/Sarii4
-Carolina Botella -  https://github.com/CarolBV
-Mabel Zárate - https://github.com/MabelZar
-Rebeca Garcia - https://github.com/rebkg87
-Eugenia Saravia -https://github.com/Euge-Saravia
+1. Sara Teran - https://github.com/Sarii4
+2. Carolina Botella -  https://github.com/CarolBV
+3. Mabel Zárate - https://github.com/MabelZar
+4. Rebeca Garcia - https://github.com/rebkg87
+5. Eugenia Saravia -https://github.com/Euge-Saravia
