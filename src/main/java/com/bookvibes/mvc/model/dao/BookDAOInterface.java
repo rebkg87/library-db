@@ -12,4 +12,5 @@ public interface BookDAOInterface {
     public List<Book> getBookByTitle(String bookTitle);
     public void showBook (Connection conn) throws SQLException;
     public void deleteBook(Connection conn, int bookId) throws SQLException;
+    public List<Book> showBooks();
 }

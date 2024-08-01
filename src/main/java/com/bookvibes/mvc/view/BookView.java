@@ -151,6 +151,11 @@ public class BookView {
             System.out.println("Error: " + e.getMessage());
         }
     }
-
+    public void showAllBooks() {
+        List<Book> bookShowList = bookController.getAllBooks();
+        for (Book bb : bookShowList) {
+            System.out.println("| " + bb.getId() + " | " + bb.getTitle() + " | " + bb.getAuthor() + " | " + bb.getGenre() + " | " + bb.getIsbn() + " | ");
+        }
+    }
 
 }
