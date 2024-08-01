@@ -13,11 +13,12 @@ public class MenuView {
 
     public void showMenuView() {
         Scanner scanner = new Scanner(System.in);
-        System.out.println("SISTEMA DE BIBLIOTECA");
         String choice;
         String again;
 
         do {
+            System.out.println("SISTEMA DE BIBLIOTECA");
+            System.out.println();
             System.out.println("\n----- Menú Principal -----");
             System.out.println("1. Ver catálogo de libros");
             System.out.println("2. Agregar libro");
@@ -26,7 +27,7 @@ public class MenuView {
             System.out.println("5. Eliminar libro");
             System.out.println("6. Salir");
             System.out.print("Seleccione una opción: ");
-            choice = scanner.next();
+            choice = scanner.nextLine();
 
             switch (choice) {
                 case "1":
@@ -39,7 +40,6 @@ public class MenuView {
                     bookView.showBooksByGenre();
                     break;
                 case "4":
-                    System.out.println("Deseas buscar por: título (1), género (2), autor (3)");
                     searchView.showSearchView();
                     break;
                 case "5":
@@ -50,11 +50,12 @@ public class MenuView {
                     break;
                 default:
                     System.out.println("Opción inválida. Por favor, intente de nuevo.");
+                    break;
             }
 
             if (!choice.equals("6")) {
                 System.out.print("Desea otra opción del MENU? (S/N): ");
-                again = scanner.next();
+                again = scanner.nextLine();
             } else {
                 again = "N";
             }
@@ -62,6 +63,7 @@ public class MenuView {
         } while ("S".equalsIgnoreCase(again));
 
         scanner.close();
+
     }
 }
 

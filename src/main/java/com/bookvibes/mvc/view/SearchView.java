@@ -15,7 +15,8 @@ public class SearchView {
         String again;
         String search;
         do {
-            search = scanner.next();
+            System.out.println("Deseas buscar por: título (1), género (2), autor (3)");
+            search = scanner.nextLine();
 
             switch (search) {
                 case "1":
@@ -30,13 +31,11 @@ public class SearchView {
                 default:
                     System.out.println("Opción inválida. Por favor, intente de nuevo.");
             }
-
+            System.out.print("¿Desea realizar otra búsqueda? (S/N): ");
             again = scanner.next();
+
         } while ("S".equalsIgnoreCase(again));
-
-        scanner.close();
     }
-
 }
 
 

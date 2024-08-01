@@ -50,7 +50,6 @@ public class BookView {
             System.out.print("Ingrese el ID del autor: ");
             int authorId = scanner.nextInt();
 
-
             List<Book> bookList = bookController.getBookByAuthor(authorId);
 
 
@@ -66,7 +65,6 @@ public class BookView {
 
             System.out.print("Desea consultar nuevamente? (S/N): ");
             again = scanner.next();
-
         } while ("S".equalsIgnoreCase(again));
 
     }
@@ -110,7 +108,6 @@ public class BookView {
         System.out.println("CONSULTA DE LIBROS POR TITULO");
         System.out.println("----------------------------");
         System.out.println("");
-
         System.out.println();
         String again;
 
@@ -144,6 +141,7 @@ public class BookView {
 
             System.out.println("Introduce el ID del libro a eliminar: ");
             int bookId = scanner.nextInt();
+            scanner.nextLine();
             bookController.deleteBook(bookId);
 
 
@@ -183,7 +181,7 @@ public class BookView {
 
         System.out.println("Ingrese el ISBN del libro:");
         long isbn = scanner.nextLong();
-        scanner.nextLine(); // consume the newline
+        scanner.nextLine();
 
         Book book = new Book();
         book.setTitle(title);
