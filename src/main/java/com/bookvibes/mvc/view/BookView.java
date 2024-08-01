@@ -10,6 +10,7 @@ import com.bookvibes.mvc.controller.GenreController;
 
 import java.sql.Connection;
 import java.sql.SQLException;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Scanner;
 
@@ -157,5 +158,39 @@ public class BookView {
             System.out.println("| " + bb.getId() + " | " + bb.getTitle() + " | " + bb.getAuthor() + " | " + bb.getGenre() + " | " + bb.getIsbn() + " | ");
         }
     }
+    public void addBook() {
+        Scanner scanner = new Scanner(System.in);
 
+        System.out.println("Ingrese el título del libro:");
+        String title = scanner.nextLine();
+
+        List<String> authors = new ArrayList<>();
+        System.out.println("Ingrese los autores del libro (separados por coma):");
+        String[] authorsInput = scanner.nextLine().split(",");
+        for (String author : authorsInput) {
+            authors.add(author.trim());
+        }
+
+        System.out.println("Ingrese la descripción del libro:");
+        String description = scanner.nextLine();
+        List<String> genres = new ArrayList<>();
+
+        System.out.println("Ingrese los géneros del libro (separados por coma):");
+        String[] genresInput = scanner.nextLine().split(",");
+        for (String genre : genresInput) {
+            genres.add(genre.trim());
+        }
+
+        System.out.println("Ingrese el ISBN del libro:");
+        long isbn = scanner.nextLong();
+        scanner.nextLine(); // consume the newline
+
+        Book book = new Book();
+        book.setTitle(title);
+        book.setDescription(description);
+        book.setIsbn(isbn);
+
+        bookController.addBook(book, authors, genres);
+    }
 }
+

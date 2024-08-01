@@ -8,12 +8,11 @@ import java.util.List;
 public class BookDAO implements BookDAOInterface {
 
     private static String TABLENAME = "books";
-
     private static String GET_ALL = "SELECT b.id, b.title, b.description, b.isbn FROM " + TABLENAME + " AS b ";
     private static String GET_BY_AUTHOR = GET_ALL + "JOIN authors_books AS ab ON ab.id_book = b.id WHERE ab.id_author = ?";
     private static String GET_BY_GENRE = GET_ALL + "JOIN genres_books AS gb ON gb.id_book = b.id WHERE gb.id_genre = ?";
     private static String GET_BY_TITLE= GET_ALL + "WHERE LOWER(b.title) LIKE '%' || LOWER(?) || '%' ";
-
+    private static final String CHECK_BOOK_EXISTENCE = "SELECT COUNT(*) FROM " + TABLENAME + " WHERE LOWER(title) = LOWER(?)";
 
     @Override
     public List<Book> getBookByAuthor(Integer authorId) {
@@ -198,13 +197,107 @@ public class BookDAO implements BookDAOInterface {
         return bookList;
     }
 
-//    public static void main(String[] args) {
-//        BookDao bookDao = new BookDao();
-//        List<Book> bookShowList = bookDao.getBookByTitle("SoMbra");
-//        for (Book bb : bookShowList) {
-//            System.out.println("| " + bb.getId() + " | " + bb.getTitle() + " | " + bb.getIsbn() + " | " );
-//        }
-//    }
 
+    @Override
+    public void addBook(Book book, List<String> authors, List<String> genres) {
+        try (Connection conn = DBConnection.getConnection()) {
+            conn.setAutoCommit(false);
 
+            String insertBookSQL = "INSERT INTO books (title, description, isbn) VALUES (?, ?, ?) RETURNING id";
+            try (PreparedStatement pstmt = conn.prepareStatement(insertBookSQL)) {
+                pstmt.setString(1, book.getTitle());
+                pstmt.setString(2, book.getDescription());
+                pstmt.setLong(3, book.getIsbn());
+                try (ResultSet rs = pstmt.executeQuery()) {
+                    if (rs.next()) {
+                        int bookId = rs.getInt(1);
+                        insertAuthorsAndGenres(conn, bookId, authors, genres);
+                    }
+                }
+            }
+            conn.commit();
+        } catch (SQLException e) {
+            e.printStackTrace();
+            throw new RuntimeException("Error al guardar el libro: " + e.getMessage(), e);
+        }
+    }
+
+    private void insertAuthorsAndGenres(Connection conn, int bookId, List<String> authors, List<String> genres) throws SQLException {
+        String insertAuthorSQL = "INSERT INTO authors (author) VALUES (?) ON CONFLICT (author) DO NOTHING";
+        String insertAuthorsBooksSQL = "INSERT INTO authors_books (id_author, id_book) VALUES (?, ?)";
+        try (PreparedStatement pstmt = conn.prepareStatement(insertAuthorSQL)) {
+            for (String author : authors) {
+                pstmt.setString(1, author);
+                pstmt.executeUpdate();
+                int authorId = getAuthorId(conn, author);
+                try (PreparedStatement ps = conn.prepareStatement(insertAuthorsBooksSQL)) {
+                    ps.setInt(1, authorId);
+                    ps.setInt(2, bookId);
+                    ps.executeUpdate();
+                }
+            }
+        }
+        String insertGenreSQL = "INSERT INTO genres (genre) VALUES (?) ON CONFLICT (genre) DO NOTHING";
+        String insertGenresBooksSQL = "INSERT INTO genres_books (id_genre, id_book) VALUES (?, ?)";
+        try (PreparedStatement pstmt = conn.prepareStatement(insertGenreSQL)) {
+            for (String genre : genres) {
+                pstmt.setString(1, genre);
+                pstmt.executeUpdate();
+                int genreId = getGenreId(conn, genre);
+                try (PreparedStatement ps = conn.prepareStatement(insertGenresBooksSQL)) {
+                    ps.setInt(1, genreId);
+                    ps.setInt(2, bookId);
+                    ps.executeUpdate();
+                }
+            }
+        }
+    }
+
+    @Override
+    public int getAuthorId(Connection conn, String author) throws SQLException {
+        String selectAuthorSQL = "SELECT id FROM authors WHERE author = ?";
+        try (PreparedStatement pstmt = conn.prepareStatement(selectAuthorSQL)) {
+            pstmt.setString(1, author);
+            try (ResultSet rs = pstmt.executeQuery()) {
+                if (rs.next()) {
+                    return rs.getInt("id");
+                } else {
+                    throw new SQLException("Author not found: " + author);
+                }
+            }
+        }
+    }
+
+    @Override
+    public int getGenreId(Connection conn, String genre) throws SQLException {
+        String selectGenreSQL = "SELECT id FROM genres WHERE genre = ?";
+        try (PreparedStatement pstmt = conn.prepareStatement(selectGenreSQL)) {
+            pstmt.setString(1, genre);
+            try (ResultSet rs = pstmt.executeQuery()) {
+                if (rs.next()) {
+                    return rs.getInt("id");
+                } else {
+                    throw new SQLException("Genre not found: " + genre);
+                }
+            }
+        }
+    }
+
+    @Override
+    public boolean isBookExist(String bookTitle) {
+        try (Connection conn = DBConnection.getConnection();
+             PreparedStatement ps = conn.prepareStatement(CHECK_BOOK_EXISTENCE)) {
+            ps.setString(1, bookTitle);
+            try (ResultSet rs = ps.executeQuery()) {
+                if (rs.next()) {
+                    return rs.getInt(1) > 0;
+                }
+            }
+        } catch (SQLException e) {
+            throw new RuntimeException(e);
+        }
+        return false;
+    }
 }
+
+

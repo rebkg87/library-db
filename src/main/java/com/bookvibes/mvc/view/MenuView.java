@@ -33,7 +33,7 @@ public class MenuView {
                     bookView.showAllBooks();
                     break;
                 case "2":
-                    bookView.showBooksByGenre();
+                    bookView.addBook();
                     break;
                 case "3":
                     bookView.showBooksByGenre();

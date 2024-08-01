@@ -5,6 +5,7 @@ import com.bookvibes.mvc.model.Book;
 import com.bookvibes.mvc.model.dao.BookDAOInterface;
 
 import java.sql.Connection;
+
 import java.sql.SQLException;
 import java.util.List;
 
@@ -56,4 +57,13 @@ public class BookController {
         List<Book> bookShowList = bookDAOInterface.showBooks();
         return bookShowList;
     }
-}
+    public void addBook(Book book, List<String> authors, List<String> genres) {
+        if (bookDAOInterface.isBookExist(book.getTitle())) {
+            System.out.println("El libro ya existe en la base de datos.");
+        } else {
+            bookDAOInterface.addBook(book, authors, genres);
+            System.out.println("Libro agregado exitosamente.");
+        }
+    }
+    }
+
