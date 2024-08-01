@@ -1,6 +1,4 @@
 package com.bookvibes.mvc.controller;
-
-
 import com.bookvibes.mvc.model.Book;
 import com.bookvibes.mvc.model.dao.BookDAOInterface;
 import org.junit.jupiter.api.Test;
@@ -34,17 +32,15 @@ public class BookControllerTest {
 
         when(bookDAOInterface.getBookByAuthor(authorId)).thenReturn(expectedBooks);
 
-        // Act
         List<Book> actualBooks = bookController.getBookByAuthor(authorId);
 
-        // Assert
         assertEquals(expectedBooks, actualBooks);
         verify(bookDAOInterface, times(1)).getBookByAuthor(authorId);
     }
 
     @Test
     public void testGetBookByGenre() {
-      
+        // Arrange
         Integer genreId = 1;
         List<Book> expectedBooks = new ArrayList<>();
         expectedBooks.add(new Book("JK Rowling", "Harry Potter y la Piedra Filosofal", 1234567, "Fantástico", "Description"));
@@ -52,17 +48,17 @@ public class BookControllerTest {
 
         when(bookDAOInterface.getBookByGenre(genreId)).thenReturn(expectedBooks);
 
-
+        // Act
         List<Book> actualBooks = bookController.getBookByGenre(genreId);
 
-     
+        // Assert
         assertEquals(expectedBooks, actualBooks);
         verify(bookDAOInterface, times(1)).getBookByGenre(genreId);
     }
 
     @Test
     public void testGetBookByTitle() {
-
+        // Arrange
         String bookTitle = "Title 1";
         List<Book> expectedBooks = new ArrayList<>();
         expectedBooks.add(new Book("JK Rowling", "Harry Potter y la Piedra Filosofal", 1234567, "Fantástico", "Description"));
@@ -70,10 +66,10 @@ public class BookControllerTest {
 
         when(bookDAOInterface.getBookByTitle(bookTitle)).thenReturn(expectedBooks);
 
-   
+        // Act
         List<Book> actualBooks = bookController.getBookByTitle(bookTitle);
 
-
+        // Assert
         assertEquals(expectedBooks, actualBooks);
         verify(bookDAOInterface, times(1)).getBookByTitle(bookTitle);
     }
