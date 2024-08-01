@@ -1,6 +1,5 @@
 package com.bookvibes.mvc.controller;
-
-import com.bookvibes.mvc.model.Books;
+import com.bookvibes.mvc.model.Book;
 import com.bookvibes.mvc.model.dao.BookDAOInterface;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
@@ -27,14 +26,14 @@ public class BookControllerTest {
     public void testGetBookByAuthor() {
         // Arrange
         Integer authorId = 1;
-        List<Books> expectedBooks = new ArrayList<>();
-        expectedBooks.add(new Books("JK Rowling", "Harry Potter y la Piedra Filosofal", 1234567, "Fantástico", "Description"));
-        expectedBooks.add(new Books("Sergi Torres", "La biología del presente", 1234568, "Autoayuda", "Description"));
+        List<Book> expectedBooks = new ArrayList<>();
+        expectedBooks.add(new Book("JK Rowling", "Harry Potter y la Piedra Filosofal", 1234567, "Fantástico", "Description"));
+        expectedBooks.add(new Book("Sergi Torres", "La biología del presente", 1234568, "Autoayuda", "Description"));
 
         when(bookDAOInterface.getBookByAuthor(authorId)).thenReturn(expectedBooks);
 
         // Act
-        List<Books> actualBooks = bookController.getBookByAuthor(authorId);
+        List<Book> actualBooks = bookController.getBookByAuthor(authorId);
 
         // Assert
         assertEquals(expectedBooks, actualBooks);
@@ -45,14 +44,14 @@ public class BookControllerTest {
     public void testGetBookByGenre() {
         // Arrange
         Integer genreId = 1;
-        List<Books> expectedBooks = new ArrayList<>();
-        expectedBooks.add(new Books("JK Rowling", "Harry Potter y la Piedra Filosofal", 1234567, "Fantástico", "Description"));
-        expectedBooks.add(new Books("Sergi Torres", "La biología del presente", 1234568, "Autoayuda", "Description"));
+        List<Book> expectedBooks = new ArrayList<>();
+        expectedBooks.add(new Book("JK Rowling", "Harry Potter y la Piedra Filosofal", 1234567, "Fantástico", "Description"));
+        expectedBooks.add(new Book("Sergi Torres", "La biología del presente", 1234568, "Autoayuda", "Description"));
 
         when(bookDAOInterface.getBookByGenre(genreId)).thenReturn(expectedBooks);
 
         // Act
-        List<Books> actualBooks = bookController.getBookByGenre(genreId);
+        List<Book> actualBooks = bookController.getBookByGenre(genreId);
 
         // Assert
         assertEquals(expectedBooks, actualBooks);
@@ -63,14 +62,14 @@ public class BookControllerTest {
     public void testGetBookByTitle() {
         // Arrange
         String bookTitle = "Title 1";
-        List<Books> expectedBooks = new ArrayList<>();
-        expectedBooks.add(new Books("JK Rowling", "Harry Potter y la Piedra Filosofal", 1234567, "Fantástico", "Description"));
-        expectedBooks.add(new Books("Sergi Torres", "La biología del presente", 1234568, "Autoayuda", "Description"));
+        List<Book> expectedBooks = new ArrayList<>();
+        expectedBooks.add(new Book("JK Rowling", "Harry Potter y la Piedra Filosofal", 1234567, "Fantástico", "Description"));
+        expectedBooks.add(new Book("Sergi Torres", "La biología del presente", 1234568, "Autoayuda", "Description"));
 
         when(bookDAOInterface.getBookByTitle(bookTitle)).thenReturn(expectedBooks);
 
         // Act
-        List<Books> actualBooks = bookController.getBookByTitle(bookTitle);
+        List<Book> actualBooks = bookController.getBookByTitle(bookTitle);
 
         // Assert
         assertEquals(expectedBooks, actualBooks);
