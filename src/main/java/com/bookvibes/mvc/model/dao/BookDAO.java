@@ -13,11 +13,6 @@ public class BookDAO implements BookDAOInterface {
     private static String GET_BY_AUTHOR = GET_ALL + "JOIN authors_books AS ab ON ab.id_book = b.id WHERE ab.id_author = ?";
     private static String GET_BY_GENRE = GET_ALL + "JOIN genres_books AS gb ON gb.id_book = b.id WHERE gb.id_genre = ?";
     private static String GET_BY_TITLE = GET_ALL + "WHERE LOWER(b.title) LIKE '%' || LOWER(?) || '%' ";
-    private static final String TABLENAME = "books";
-    private static final String GET_ALL = "SELECT b.id, b.title, b.description, b.isbn FROM " + TABLENAME + " AS b ";
-    private static final String GET_BY_AUTHOR = GET_ALL + "JOIN authors_books AS ab ON ab.id_book = b.id WHERE ab.id_author = ? ORDER BY b.id";
-    private static final String GET_BY_GENRE = GET_ALL + "JOIN genres_books AS gb ON gb.id_book = b.id WHERE gb.id_genre = ? ORDER BY b.id";
-    private static final String GET_BY_TITLE= GET_ALL + "WHERE LOWER(b.title) LIKE '%' || LOWER(?) || '%' ORDER BY b.id";
     private static final String CHECK_BOOK_EXISTENCE = "SELECT COUNT(*) FROM " + TABLENAME + " WHERE LOWER(title) = LOWER(?)";
 
     @Override
@@ -75,8 +70,6 @@ public class BookDAO implements BookDAOInterface {
             }
         } catch (SQLException e) {
             throw new RuntimeException((e));
-        } finally {
-            //            DBConnection.closeConnection();
         }
         return bookList;
     }
@@ -103,8 +96,6 @@ public class BookDAO implements BookDAOInterface {
             }
         } catch (SQLException e) {
             throw new RuntimeException((e));
-        } finally {
-            //            DBConnection.closeConnection();
         }
         return bookList;
     }
