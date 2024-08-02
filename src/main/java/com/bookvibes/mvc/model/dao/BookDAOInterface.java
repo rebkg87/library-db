@@ -15,4 +15,6 @@ public interface BookDAOInterface {
     boolean isBookExist(String bookTitle);
     public int getAuthorId(Connection conn, String author) throws SQLException;
     public int getGenreId(Connection conn, String genre) throws SQLException;
+    void updateBookDetails(Connection connection, int bookId, String newTitle, String newDescription, Long newIsbn) throws SQLException;
+    void updateBookRelations(Connection connection, int bookId, int[] newEntityIds, String tableName, String entityIdColumn) throws SQLException;
 }

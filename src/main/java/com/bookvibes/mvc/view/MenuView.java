@@ -36,7 +36,7 @@ public class MenuView {
                     bookView.addBook();
                     break;
                 case "3":
-                    bookView.showBooksByGenre();
+                    bookView.editBook();
                     break;
                 case "4":
                     System.out.println("Deseas buscar por: título (1), género (2), autor (3)");

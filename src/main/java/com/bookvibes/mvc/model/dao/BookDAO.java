@@ -11,7 +11,7 @@ public class BookDAO implements BookDAOInterface {
     private static String GET_ALL = "SELECT b.id, b.title, b.description, b.isbn FROM " + TABLENAME + " AS b ";
     private static String GET_BY_AUTHOR = GET_ALL + "JOIN authors_books AS ab ON ab.id_book = b.id WHERE ab.id_author = ?";
     private static String GET_BY_GENRE = GET_ALL + "JOIN genres_books AS gb ON gb.id_book = b.id WHERE gb.id_genre = ?";
-    private static String GET_BY_TITLE= GET_ALL + "WHERE LOWER(b.title) LIKE '%' || LOWER(?) || '%' ";
+    private static String GET_BY_TITLE = GET_ALL + "WHERE LOWER(b.title) LIKE '%' || LOWER(?) || '%' ";
     private static final String CHECK_BOOK_EXISTENCE = "SELECT COUNT(*) FROM " + TABLENAME + " WHERE LOWER(title) = LOWER(?)";
 
     @Override
@@ -129,9 +129,9 @@ public class BookDAO implements BookDAOInterface {
     //eliminar por ID
 
     @Override
-    public void deleteBook (Connection conn, int bookId) throws SQLException{
+    public void deleteBook(Connection conn, int bookId) throws SQLException {
         String deleteAuthorBookSQL = "DELETE FROM authors_books WHERE id_book = ?";
-        String deleteGenreBookSQL= "DELETE FROM genres_books WHERE id_book = ?";
+        String deleteGenreBookSQL = "DELETE FROM genres_books WHERE id_book = ?";
         String deleteBookSQL = "DELETE FROM books WHERE id = ?";
 
         try {
@@ -167,7 +167,7 @@ public class BookDAO implements BookDAOInterface {
 
     //Mostrar todos los libros
     @Override
-    public List<Book> showBooks(){
+    public List<Book> showBooks() {
 
         List<Book> bookList = new ArrayList<>();
 
@@ -297,6 +297,41 @@ public class BookDAO implements BookDAOInterface {
             throw new RuntimeException(e);
         }
         return false;
+    }
+    
+    @Override
+    public void updateBookDetails(Connection connection, int bookId, String newTitle, String newDescription, Long newIsbn) throws SQLException {
+        String updateBookSQL = "UPDATE books SET title = COALESCE(?, title), description = COALESCE(?, description), isbn = COALESCE(?, isbn) WHERE id = ?";
+        try (PreparedStatement updateBookStmt = connection.prepareStatement(updateBookSQL)) {
+            updateBookStmt.setString(1, newTitle);
+            updateBookStmt.setString(2, newDescription);
+            if (newIsbn != null) {
+                updateBookStmt.setLong(3, newIsbn);
+            } else {
+                updateBookStmt.setNull(3, java.sql.Types.BIGINT);
+            }
+            updateBookStmt.setInt(4, bookId);
+            updateBookStmt.executeUpdate();
+        }
+    }
+
+    @Override
+    public void updateBookRelations(Connection connection, int bookId, int[] newEntityIds, String tableName, String entityIdColumn) throws SQLException {
+        String deleteSQL = "DELETE FROM " + tableName + " WHERE id_book = ?";
+        String insertSQL = "INSERT INTO " + tableName + " (id_book, " + entityIdColumn + ") VALUES (?, ?)";
+
+        try (PreparedStatement deleteStmt = connection.prepareStatement(deleteSQL);
+             PreparedStatement insertStmt = connection.prepareStatement(insertSQL)) {
+            deleteStmt.setInt(1, bookId);
+            deleteStmt.executeUpdate();
+
+            for (int entityId : newEntityIds) {
+                insertStmt.setInt(1, bookId);
+                insertStmt.setInt(2, entityId);
+                insertStmt.addBatch();
+            }
+            insertStmt.executeBatch();
+        }
     }
 }
 

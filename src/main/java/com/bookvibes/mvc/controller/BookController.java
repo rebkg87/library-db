@@ -65,5 +65,25 @@ public class BookController {
             System.out.println("Libro agregado exitosamente.");
         }
     }
+    public void editBook(int bookId, String newTitle, String newDescription, Long newIsbn, int[] newAuthorIds, int[] newGenreIds) {
+        try (Connection connection = DBConnection.getConnection()) {
+            connection.setAutoCommit(false);
+
+            bookDAOInterface.updateBookDetails(connection, bookId, newTitle, newDescription, newIsbn);
+            if (newAuthorIds != null) {
+                bookDAOInterface.updateBookRelations(connection, bookId, newAuthorIds, "authors_books", "id_author");
+            }
+            if (newGenreIds != null) {
+                bookDAOInterface.updateBookRelations(connection, bookId, newGenreIds, "genres_books", "id_genre");
+            }
+
+            connection.commit();
+            System.out.println("Los datos se han actualizado correctamente.");
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
     }
+}
+    
+    
 
