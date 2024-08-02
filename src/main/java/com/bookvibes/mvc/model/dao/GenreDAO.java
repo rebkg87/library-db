@@ -31,8 +31,6 @@ public class GenreDAO implements GenreDAOInterface {
             }
         } catch (SQLException e) {
             throw new RuntimeException(e);
-        }finally {
-            // DBConnection.closeConnection();
         }
         return genderList;
     }

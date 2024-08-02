@@ -41,8 +41,6 @@ public class BookDAO implements BookDAOInterface {
 
         } catch (SQLException e) {
             throw new RuntimeException(e);
-        } finally {
-//            DBConnection.closeConnection();
         }
 
         return bookList;

@@ -35,8 +35,6 @@ public class AuthorDAO implements AuthorDAOInterface {
 
         } catch (SQLException e) {
             throw new RuntimeException(e);
-        } finally {
-            // close connection
         }
         return authorList;
     }
