@@ -18,13 +18,22 @@ public class MenuView {
         String again;
 
         do {
-            System.out.println("\n----- Menú Principal -----");
-            System.out.println("1. Ver catálogo de libros");
-            System.out.println("2. Agregar libro");
-            System.out.println("3. Editar libro");
-            System.out.println("4. Buscar libro");
-            System.out.println("5. Eliminar libro");
-            System.out.println("6. Salir");
+            System.out.println();
+            System.out.println("+----------------+");
+            System.out.println("| MENU PRINCIPAL |");
+            System.out.println("+----------------+");
+            System.out.println();
+            System.out.println("+----+------------------------+");
+            System.out.println("| ID | OPCION                 |");
+            System.out.println("+----+------------------------+");
+            System.out.println("| 1  | VER CATALOGO DE LIBROS |");
+            System.out.println("| 2  | AGREGAR LIBRO          |");
+            System.out.println("| 3  | EDITAR LIBRO           |");
+            System.out.println("| 4  | BUSCAR LIBRO           |");
+            System.out.println("| 5  | ELIMINAR LIBRO         |");
+            System.out.println("| 6  | SALIR                  |");
+            System.out.println("+----+------------------------+");
+            System.out.println();
             System.out.print("Seleccione una opción: ");
             choice = scanner.next();
 
@@ -39,7 +48,6 @@ public class MenuView {
                     bookView.editBook();
                     break;
                 case "4":
-                    System.out.println("Deseas buscar por: título (1), género (2), autor (3)");
                     searchView.showSearchView();
                     break;
                 case "5":

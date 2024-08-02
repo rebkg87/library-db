@@ -11,11 +11,23 @@ public class SearchView {
     }
 
     public void showSearchView() {
+
         Scanner scanner = new Scanner(System.in);
+
         String again;
-        String search;
         do {
-            search = scanner.next();
+
+            System.out.println("+----+----------+");
+            System.out.println("| ID + OPCION   |");
+            System.out.println("+----+----------+");
+            System.out.println("| 1  | TITULO   |");
+            System.out.println("| 2  | GENERO   |");
+            System.out.println("| 3  | AUTOR    |");
+            System.out.println("+----+----------+");
+
+            System.out.println();
+            System.out.print("Elija una opción: ");
+            String search = scanner.next();
 
             switch (search) {
                 case "1":
@@ -31,10 +43,11 @@ public class SearchView {
                     System.out.println("Opción inválida. Por favor, intente de nuevo.");
             }
 
+            System.out.println();
+            System.out.print("Desea elegir otra opción de búsqueda? (S/N): ");
             again = scanner.next();
-        } while ("S".equalsIgnoreCase(again));
 
-        scanner.close();
+        } while ("S".equalsIgnoreCase(again));
     }
 
 }

@@ -10,7 +10,7 @@ import java.util.List;
 
 public class GenreDAO implements GenreDAOInterface {
 
-    private static final String GET_ALL="SELECT a.id, a.genre FROM genres AS a";
+    private static final String GET_ALL="SELECT g.id, g.genre FROM genres AS g ORDER BY g.id";
 
     public GenreDAO() {
     }

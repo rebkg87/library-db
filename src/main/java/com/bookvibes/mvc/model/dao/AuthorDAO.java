@@ -12,7 +12,7 @@ import java.util.List;
 
 public class AuthorDAO implements AuthorDAOInterface {
 
-    private static final String GET_ALL = "SELECT a.id, a.author FROM authors AS a";
+    private static final String GET_ALL = "SELECT a.id, a.author FROM authors AS a ORDER BY a.id";
 
     public AuthorDAO() {
     }

@@ -7,6 +7,7 @@ import com.bookvibes.mvc.model.Genre;
 import com.bookvibes.mvc.controller.AuthorController;
 import com.bookvibes.mvc.controller.BookController;
 import com.bookvibes.mvc.controller.GenreController;
+import com.bookvibes.mvc.util.BookVibesUtil;
 
 import java.sql.Connection;
 import java.sql.SQLException;
@@ -15,6 +16,23 @@ import java.util.List;
 import java.util.Scanner;
 
 public class BookView {
+
+    private static final String ID = "ID";
+    private static final String NAME = "NOMBRE";
+    private static final String TITLE = "TITULO";
+    private static final String DESCRIPTION = "DESCRIPCION";
+    private static final String ISBN = "ISBN";
+
+    private static final String FORMAT_AUTHOR = "| %-2s | %-30s |%n";
+    private static final String FORMAT_AUTHOR_SEP = BookVibesUtil.getSeparator(new int[]{2, 30});
+
+    private static final String FORMAT_GENRE = "| %-2s | %-30s |%n";
+    private static final String FORMAT_GENRE_SEP = BookVibesUtil.getSeparator(new int[]{2, 30});
+
+    private static final String FORMAT_BOOK = "| %-2s | %-30s | %-70s | %-15s |%n";
+    private static final String FORMAT_BOOK_SEP = BookVibesUtil.getSeparator(new int[]{2, 30, 70, 15});
+    private static final String FORMAT_BOOK_WITHOUT_DESCR = "| %-2s | %-40s | %-15s |%n";
+    private static final String FORMAT_BOOK_WITHOUT_DESCR_SEP = BookVibesUtil.getSeparator(new int[]{2, 40, 15});
 
     private BookController bookController;
     private AuthorController authorController;
@@ -31,39 +49,49 @@ public class BookView {
 
         Scanner scanner = new Scanner(System.in);
 
-        System.out.println("----------------------------");
-        System.out.println("CONSULTA DE LIBROS POR AUTOR");
-        System.out.println("----------------------------");
-        System.out.println("");
-
+        System.out.println();
+        System.out.println("################################");
+        System.out.println("# CONSULTA DE LIBROS POR AUTOR #");
+        System.out.println("################################");
+        System.out.println();
 
         List<Author> authorList = authorController.getAll();
+        System.out.println(FORMAT_AUTHOR_SEP);
+        System.out.printf(FORMAT_AUTHOR, ID, NAME);
+        System.out.println(FORMAT_AUTHOR_SEP);
         for (Author author : authorList) {
-            System.out.println(author.getId() + " | " + author.getAuthor());
+            BookVibesUtil.print(new int[]{2, 30}, new Object[]{author.getId(), author.getAuthor()});
         }
-
-        System.out.println();
+        System.out.println(FORMAT_AUTHOR_SEP);
 
         String again;
         do {
 
+            System.out.println();
             System.out.print("Ingrese el ID del autor: ");
             int authorId = scanner.nextInt();
 
-
             List<Book> bookList = bookController.getBookByAuthor(authorId);
 
+            System.out.println();
 
             if (bookList.size() > 0) {
                 System.out.println("El resultado de la busqueda es:");
+
+                System.out.println();
+                System.out.println(FORMAT_BOOK_SEP);
+                System.out.printf(FORMAT_BOOK, ID, TITLE, DESCRIPTION, ISBN);
+                System.out.println(FORMAT_BOOK_SEP);
                 for (Book book : bookList) {
-                    System.out.println(book.getId() + " | " + book.getTitle() + " | " + book.getDescription() + " | " + book.getIsbn());
+                    BookVibesUtil.print(new int[]{2, 30, 70, 15}, new Object[]{book.getId(), book.getTitle(), book.getDescription(), book.getIsbn()});
                 }
+                System.out.println(FORMAT_BOOK_SEP);
+
             } else {
                 System.out.println("No hay resultados para su consulta.");
             }
 
-
+            System.out.println();
             System.out.print("Desea consultar nuevamente? (S/N): ");
             again = scanner.next();
 
@@ -74,31 +102,52 @@ public class BookView {
     public void showBooksByGenre() {
         Scanner scanner = new Scanner(System.in);
 
-        System.out.println("----------------------------");
-        System.out.println("CONSULTA DE LIBROS POR GENERO");
-        System.out.println("----------------------------");
-        System.out.println("");
+        System.out.println();
+        System.out.println("#################################");
+        System.out.println("# CONSULTA DE LIBROS POR GENERO #");
+        System.out.println("#################################");
+        System.out.println();
 
         List<Genre> genreList = genreController.getAll();
+        System.out.println(FORMAT_GENRE_SEP);
+        System.out.printf(FORMAT_GENRE, ID, NAME);
+        System.out.println(FORMAT_GENRE_SEP);
         for (Genre genre : genreList) {
-            System.out.println(genre.getId() + "|" + genre.getGenre());
+            BookVibesUtil.print(new int[]{2, 30}, new Object[]{genre.getId(), genre.getGenre()});
         }
+        System.out.println(FORMAT_GENRE_SEP);
+
         String again;
         do {
+
+            System.out.println();
             System.out.print("Ingrese el ID del género: ");
             int genreId = scanner.nextInt();
 
             List<Book> bookList = bookController.getBookByGenre(genreId);
+
+            System.out.println();
+
             if (bookList.size() > 0) {
                 System.out.println("El resultado de la busqueda es:");
+
+                System.out.println();
+                System.out.println(FORMAT_BOOK_WITHOUT_DESCR_SEP);
+                System.out.printf(FORMAT_BOOK_WITHOUT_DESCR, ID, TITLE, ISBN);
+                System.out.println(FORMAT_BOOK_WITHOUT_DESCR_SEP);
                 for (Book book : bookList) {
-                    System.out.println(book.getId() + " | " + book.getTitle() + " | " + book.getIsbn());
+                    BookVibesUtil.print(new int[]{2, 40, 15}, new Object[]{book.getId(), book.getTitle(), book.getIsbn()});
                 }
+                System.out.println(FORMAT_BOOK_WITHOUT_DESCR_SEP);
+
             } else {
                 System.out.println("No hay resultados para su consulta.");
             }
+
+            System.out.println();
             System.out.print("Desea consultar nuevamente? (S/N): ");
             again = scanner.next();
+
         } while ("S".equalsIgnoreCase(again));
     }
 
@@ -106,28 +155,42 @@ public class BookView {
     public void showBooksByTitle() {
         Scanner scanner = new Scanner(System.in);
 
-        System.out.println("----------------------------");
-        System.out.println("CONSULTA DE LIBROS POR TITULO");
-        System.out.println("----------------------------");
-        System.out.println("");
-
         System.out.println();
+        System.out.println("#################################");
+        System.out.println("# CONSULTA DE LIBROS POR TITULO #");
+        System.out.println("#################################");
+        System.out.println();
+
         String again;
 
         do {
             System.out.print("Ingrese el título del libro que deséa buscar: ");
             String title = scanner.next();
+
             List<Book> bookList = bookController.getBookByTitle(title);
+
+            System.out.println();
+
             if (bookList.size() > 0) {
                 System.out.println("El resultado de la busqueda es:");
+
+                System.out.println();
+                System.out.println(FORMAT_BOOK_SEP);
+                System.out.printf(FORMAT_BOOK, ID, TITLE, DESCRIPTION, ISBN);
+                System.out.println(FORMAT_BOOK_SEP);
                 for (Book book : bookList) {
-                    System.out.println("| " + book.getId() + " | " + book.getTitle() + " | " + book.getDescription() + " | " + book.getIsbn());
+                    BookVibesUtil.print(new int[]{2, 30, 70, 15}, new Object[]{book.getId(), book.getTitle(), book.getDescription(), book.getIsbn()});
                 }
+                System.out.println(FORMAT_BOOK_SEP);
+
             } else {
                 System.out.println("No hay resultados para su consulta.");
             }
+
+            System.out.println();
             System.out.print("Desea consultar nuevamente? (S/N): ");
             again = scanner.next();
+
         } while ("S".equalsIgnoreCase(again));
 
     }
