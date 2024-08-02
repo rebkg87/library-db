@@ -255,5 +255,68 @@ public class BookView {
 
         bookController.addBook(book, authors, genres);
     }
+
+    public void editBook() {
+    Scanner scanner = new Scanner(System.in);
+    
+        System.out.println("Ingrese el ID del libro que desea editar: ");
+    int bookId = scanner.nextInt();
+        scanner.nextLine();
+
+        System.out.println("¿Desea editar el título? (s/n): ");
+    String editTitle = scanner.nextLine();
+    String newTitle = null;
+        if (editTitle.equalsIgnoreCase("s")) {
+        System.out.println("Ingrese el nuevo título: ");
+        newTitle = scanner.nextLine();
+    }
+
+        System.out.println("¿Desea editar la descripción? (s/n): ");
+    String editDescription = scanner.nextLine();
+    String newDescription = null;
+        if (editDescription.equalsIgnoreCase("s")) {
+        System.out.println("Ingrese la nueva descripción: ");
+        newDescription = scanner.nextLine();
+    }
+
+        System.out.println("¿Desea editar el ISBN? (s/n): ");
+    String editIsbn = scanner.nextLine();
+    Long newIsbn = null;
+        if (editIsbn.equalsIgnoreCase("s")) {
+        System.out.println("Ingrese el nuevo ISBN: ");
+        newIsbn = scanner.nextLong();
+        scanner.nextLine();
+    }
+
+        System.out.println("¿Desea editar los autores? (s/n): ");
+    String editAuthors = scanner.nextLine();
+    int[] newAuthorIds = null;
+        if (editAuthors.equalsIgnoreCase("s")) {
+        List<Integer> authorIdsList = new ArrayList<>();
+        while (true) {
+            System.out.println("Ingrese el ID del nuevo autor (o '0' para finalizar): ");
+            int authorId = scanner.nextInt();
+            if (authorId == 0) break;
+            authorIdsList.add(authorId);
+        }
+        newAuthorIds = authorIdsList.stream().mapToInt(i -> i).toArray();
+    }
+
+        System.out.println("¿Desea editar los géneros? (s/n): ");
+    String editGenres = scanner.nextLine();
+    int[] newGenreIds = null;
+        if (editGenres.equalsIgnoreCase("s")) {
+        List<Integer> genreIdsList = new ArrayList<>();
+        while (true) {
+            System.out.println("Ingrese el ID del nuevo género (o '0' para finalizar): ");
+            int genreId = scanner.nextInt();
+            if (genreId == 0) break;
+            genreIdsList.add(genreId);
+        }
+        newGenreIds = genreIdsList.stream().mapToInt(i -> i).toArray();
+    }
+        bookController.editBook(bookId, newTitle, newDescription, newIsbn, newAuthorIds, newGenreIds);
+        
+}
 }
 

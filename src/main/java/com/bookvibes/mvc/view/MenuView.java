@@ -45,7 +45,7 @@ public class MenuView {
                     bookView.addBook();
                     break;
                 case "3":
-                    bookView.showBooksByGenre();
+                    bookView.editBook();
                     break;
                 case "4":
                     searchView.showSearchView();
